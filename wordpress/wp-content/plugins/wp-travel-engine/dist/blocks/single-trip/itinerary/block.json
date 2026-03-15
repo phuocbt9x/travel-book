@@ -1,0 +1,481 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/itinerary",
+  "version": "1.0.0",
+  "title": "Trip Itinerary",
+  "icon": "editor-ol-rtl",
+  "description": "Create a travel itinerary with the Trip Itinerary Block. Add and customise titles, descriptions, icons and dates to timeline items.",
+  "category": "widgets",
+  "script": [],
+  "supports": {
+    "wptravelenginetripblocks": {
+      "colors": {
+        "link": false
+      },
+      "border": true,
+      "spacing": {
+        "margin": true,
+        "padding": true
+      },
+      "panels": {
+        "-itinerary-": {
+          "title": "Itinerary",
+          "icon": "color"
+        },
+        "-itinerary-expand-": {
+          "title": "Expand All"
+        },
+        "-title-": {
+          "title": "Title"
+        },
+        "-itinerary-info-": {
+          "title": "Itinerary Info"
+        },
+        "-content-": {
+          "title": "Content"
+        }
+      }
+    }
+  },
+  "attributes": {
+    "expandAll": {
+      "type": "boolean",
+      "label": "Expand Button",
+      "panel": "-itinerary-expand-",
+      "default": false,
+      "selectors": "%WRAPPER% .itinerary .wte-toggle-button-wrap",
+      "control": {
+        "type": "switch"
+      }
+    },
+    "ExpandTypography": {
+      "type": "object",
+      "label": "Typography",
+      "panel": "-itinerary-expand-",
+      "default": {},
+      "selectors": [
+        ".itinerary .wte-toggle-button-wrap .aib-button-label"
+      ],
+      "control": {
+        "type": "typography"
+      }
+    },
+    "ExpandTextAlignment": {
+      "type": "string",
+      "default": "right",
+      "label": "Alignment",
+      "control": {
+        "type": "alignment",
+        "style": "text-align"
+      },
+      "selectors": "%WRAPPER% .itinerary .wte-toggle-button-wrap",
+      "panel": "-itinerary-expand-"
+    },
+    "toggleColor": {
+      "type": "object",
+      "label": "Toggle Color",
+      "default": {
+        "textColor": "#111111",
+        "button": "#147DFE"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "textColor": {
+            "label": "Text Color",
+            "style": "color",
+            "selectors": [
+              "%WRAPPER% .itinerary .aib-button-label"
+            ]
+          },
+          "button": {
+            "label": "Button Color",
+            "style": "--primary-color",
+            "selectors": [
+              "%WRAPPER% .checkbox"
+            ]
+          }
+        }
+      },
+      "panel": "-itinerary-expand-"
+    },
+    "ExpandButtonPadding": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "24px",
+        "left": ""
+      },
+      "label": "Padding",
+      "selectors": "%WRAPPER% .itinerary .wte-toggle-button-wrap",
+      "panel": "-itinerary-expand-",
+      "control": {
+        "type": "spacing",
+        "style": "padding"
+      }
+    },
+    "showAll": {
+      "type": "boolean",
+      "label": "Always Show All Itinerary",
+      "panel": "-itinerary-",
+      "default": false,
+      "control": {
+        "type": "switch"
+      }
+    },
+    "showBullets": {
+      "type": "boolean",
+      "label": "Show Bullets",
+      "panel": "-itinerary-",
+      "default": true,
+      "control": {
+        "type": "switch"
+      }
+    },
+    "iconColor": {
+      "type": "object",
+      "label": "Icon Color",
+      "default": {
+        "initial": "#147DFE"
+      },
+      "selectors": "%WRAPPER% .itinerary .itinerary-row",
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Icon",
+            "style": "--primary-color"
+          }
+        }
+      },
+      "panel": "-itinerary-"
+    },
+    "toggleSpacing": {
+      "type": "string",
+      "label": "Toggle Spacing",
+      "panel": "-itinerary-",
+      "default": "0px",
+      "selectors": "%WRAPPER% .itinerary .itinerary-row .accordion-tabs-toggle .rotator",
+      "control": {
+        "type": "range",
+        "style": "right",
+        "controlAttribute": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    },
+    "itemSpacing": {
+      "type": "string",
+      "label": "Items Spacing",
+      "panel": "-itinerary-",
+      "default": "48px",
+      "selectors": "%WRAPPER% .itinerary .itinerary-row",
+      "control": {
+        "type": "range",
+        "style": "margin-bottom",
+        "controlAttribute": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    },
+    "showDivider": {
+      "type": "boolean",
+      "default": true,
+      "label": "Divider",
+      "panel": "-itinerary-",
+      "control": {
+        "type": "switch"
+      }
+    },
+    "dividerColor": {
+      "type": "object",
+      "label": "Divider Color",
+      "default": {
+        "initial": "#040F1A1A"
+      },
+      "selectors": "%WRAPPER% .itinerary .itinerary-row",
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Divider",
+            "style": "border-color"
+          }
+        }
+      },
+      "panel": "-itinerary-"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "",
+      "selectors": [
+        "%WRAPPER% .itinerary",
+        "%WRAPPER% .itinerary .itinerary-content .itinerary-detail-additional-info span"
+      ]
+    },
+    "titleTypography": {
+      "type": "object",
+      "label": "Typography",
+      "panel": "-title-",
+      "default": {},
+      "selectors": [
+        ".itinerary .wte-itinerary-head-wrap .title",
+        ".itinerary .wte-itinerary-head-wrap .itinerary-title"
+      ],
+      "control": {
+        "type": "typography"
+      }
+    },
+    "titleColor": {
+      "type": "object",
+      "label": "Title Color",
+      "default": {
+        "day": "#777777",
+        "initial": "#111111"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "day": {
+            "label": "Day",
+            "style": "color",
+            "selectors": [
+              "%WRAPPER% .itinerary .wte-itinerary-head-wrap .title"
+            ]
+          },
+          "initial": {
+            "label": "Title",
+            "style": "color",
+            "selectors": [
+              "%WRAPPER% .itinerary .wte-itinerary-head-wrap .itinerary-title"
+            ]
+          }
+        }
+      },
+      "panel": "-title-"
+    },
+    "titleBackground": {
+      "type": "string",
+      "label": "Background",
+      "default": "",
+      "control": {
+        "type": "color",
+        "style": "background-color"
+      },
+      "panel": "-title-",
+      "selectors": "%WRAPPER% .itinerary .itinerary-row .wte-itinerary-head-wrap"
+    },
+    "dayLabel": {
+      "type": "boolean",
+      "label": "Day Label",
+      "panel": "-title-",
+      "default": true,
+      "control": {
+        "type": "switch"
+      }
+    },
+    "titlePadding": {
+      "type": "object",
+      "label": "Padding",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      },
+      "control": {
+        "type": "spacing",
+        "style": "padding"
+      },
+      "panel": "-title-",
+      "selectors": "%WRAPPER% .itinerary .itinerary-row .wte-itinerary-head-wrap"
+    },
+    "contentBackground": {
+      "type": "string",
+      "label": "Background",
+      "default": "",
+      "control": {
+        "type": "color",
+        "style": "background-color"
+      },
+      "panel": "-content-",
+      "selectors": "%WRAPPER% .itinerary .itinerary-content"
+    },
+    "contentPadding": {
+      "type": "object",
+      "label": "Padding",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      },
+      "control": {
+        "type": "spacing",
+        "style": "padding"
+      },
+      "panel": "-content-",
+      "selectors": "%WRAPPER% .itinerary .itinerary-content"
+    },
+    "itineraryInfoColor": {
+      "type": "object",
+      "default": {
+        "text": "rgba(6, 22, 38, 0.6)",
+        "icon": "var(--primary-color)"
+      },
+      "label": "Color",
+      "panel": "-itinerary-info-",
+      "control": {
+        "type": "color",
+        "labels": {
+          "text": {
+            "label": "Text",
+            "style": "color",
+            "selectors": "%WRAPPER% .itinerary .itinerary-detail-additional-info [class*=itinerary-]"
+          },
+          "icon": {
+            "label": "Icon",
+            "style": "fill",
+            "selectors": "%WRAPPER% .itinerary .itinerary-detail-additional-info [class*=itinerary-]"
+          }
+        }
+      }
+    },
+    "itineraryInfoLinkColor": {
+      "type": "object",
+      "default": {
+        "initial": "rgba(6, 22, 38, 0.6)",
+        "hover": "var(--primary-color)"
+      },
+      "label": "Link Color",
+      "panel": "-itinerary-info-",
+      "selectors": "%WRAPPER% .itinerary .itinerary-detail-additional-info > .itinerary-sleep-mode .label a",
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Initial",
+            "style": "color"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "color:hover"
+          }
+        }
+      }
+    },
+    "itineraryInfoBackground": {
+      "type": "string",
+      "default": "",
+      "label": "Background",
+      "selectors": "%WRAPPER% .itinerary .itinerary-detail-additional-info",
+      "panel": "-itinerary-info-",
+      "control": {
+        "type": "color",
+        "style": "background-color"
+      }
+    },
+    "itineraryInfoBorder": {
+      "type": "object",
+      "default": {
+        "width": 1,
+        "style": "none",
+        "color": ""
+      },
+      "label": "Border",
+      "selectors": "%WRAPPER% .itinerary .itinerary-detail-additional-info",
+      "panel": "-itinerary-info-",
+      "control": {
+        "type": "border"
+      }
+    },
+    "itineraryInfoRadius": {
+      "type": "string",
+      "default": "0px",
+      "label": "Border Radius",
+      "selectors": "%WRAPPER% .itinerary .itinerary-detail-additional-info",
+      "panel": "-itinerary-info-",
+      "control": {
+        "type": "range",
+        "style": "border-radius",
+        "controlAttribute": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    },
+    "itineraryInfosGap": {
+      "type": "string",
+      "default": "60px",
+      "label": "Items Gap",
+      "selectors": "%WRAPPER% .itinerary .itinerary-detail-additional-info",
+      "panel": "-itinerary-info-",
+      "control": {
+        "type": "range",
+        "style": "--infos-gap",
+        "controlAttribute": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    },
+    "itineraryInfoDivider": {
+      "type": "boolean",
+      "default": false,
+      "label": "Items Divider",
+      "panel": "-itinerary-info-",
+      "control": {
+        "type": "switch"
+      }
+    },
+    "itineraryInfoDividerColor": {
+      "type": "string",
+      "default": "rgba(0, 0, 0, 0.07)",
+      "label": "Divider Color",
+      "panel": "-itinerary-info-",
+      "selectors": "%WRAPPER% .itinerary .itinerary-detail-additional-info.has-divider [class*=itinerary-]:not(:last-child)",
+      "control": {
+        "type": "color",
+        "style": "border-color"
+      }
+    },
+    "itineraryInfoPadding": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      },
+      "label": "Padding",
+      "selectors": "%WRAPPER% .itinerary .itinerary-detail-additional-info",
+      "panel": "-itinerary-info-",
+      "control": {
+        "type": "spacing",
+        "style": "padding"
+      }
+    },
+    "itineraryInfoMargin": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      },
+      "label": "Margin",
+      "selectors": "%WRAPPER% .itinerary .itinerary-detail-additional-info",
+      "panel": "-itinerary-info-",
+      "control": {
+        "type": "spacing",
+        "style": "margin"
+      }
+    }
+  },
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

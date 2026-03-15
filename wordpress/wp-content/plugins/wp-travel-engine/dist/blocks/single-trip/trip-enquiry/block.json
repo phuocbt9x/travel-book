@@ -1,0 +1,473 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/trip-enquiry",
+  "version": "1.0.0",
+  "title": "Trip Inquiry",
+  "category": "widgets",
+  "icon": "feedback",
+  "description": "Display the trip inquiry form on your website to ensure seamless communication and data collection.",
+  "example": {},
+  "script": [],
+  "attributes": {
+    "textColor": {
+      "type": "string",
+      "default": "#111111",
+      "selectors": [
+        "%WRAPPER% .wte_enquiry_contact_form .row-repeater.wp-travel-engine-info-field label",
+        "%WRAPPER% .wte_enquiry_contact_form .row-repeater label",
+        "%WRAPPER% .wte_enquiry_contact_form .row-form.confirm-holder label",
+        "%WRAPPER% .wte_enquiry_contact_form .row-form.confirm-holder label a"
+      ]
+    },
+    "background": {
+      "type": "string",
+      "default": "#ffffff",
+      "selectors": "%WRAPPER% .wte_enquiry_contact_form "
+    },
+    "border": {
+      "type": "object",
+      "default": {
+        "width": "1",
+        "style": "none",
+        "color": "#000000"
+      },
+      "selectors": "%WRAPPER% .wte_enquiry_contact_form "
+    },
+    "borderRadius": {
+      "type": "object",
+      "default": {},
+      "selectors": "%WRAPPER% .wte_enquiry_contact_form "
+    },
+    "boxShadow": {
+      "type": "object",
+      "default": {},
+      "selectors": "%WRAPPER% .wte_enquiry_contact_form "
+    },
+    "padding": {
+      "type": "object",
+      "default": {},
+      "selectors": "%WRAPPER% .wte_enquiry_contact_form "
+    },
+    "margin": {
+      "type": "object",
+      "default": {},
+      "selectors": "%WRAPPER% .wte_enquiry_contact_form "
+    },
+    "link": {
+      "type": "object",
+      "default": {
+        "initial": "#111111",
+        "hover": "#111111"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Link",
+            "style": "color"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "color:hover"
+          }
+        }
+      },
+      "selectors": "%WRAPPER% .wte_enquiry_contact_form .row-form.confirm-holder label a"
+    },
+    "rowSpacing": {
+      "type": "string",
+      "label": "Row Gap",
+      "selectors": "%WRAPPER% .wte_enquiry_contact_form .row-repeater:not(:last-child), %WRAPPER% .confirm-holder",
+      "default": "32px",
+      "control": {
+        "type": "range",
+        "style": "margin-bottom",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": "0",
+              "max": "100"
+            }
+          ]
+        }
+      },
+      "panel": "-form-"
+    },
+    "columnSpacing": {
+      "type": "string",
+      "label": "Column Gap",
+      "selectors": "%WRAPPER% .wte_enquiry_contact_form .row-repeater",
+      "default": "32px",
+      "control": {
+        "type": "range",
+        "style": "--column-gap",
+        "controlAttribute": {
+          "description": "It will work on screens with a size above 768px.",
+          "units": [
+            {
+              "unit": "px",
+              "min": "0",
+              "max": "100"
+            }
+          ]
+        }
+      },
+      "panel": "-form-"
+    },
+    "tripTypography": {
+      "type": "object",
+      "label": "Typography",
+      "default": {},
+      "selectors": "%WRAPPER% .wte_enquiry_contact_form .package-name-holder .wp-travel-engine-info",
+      "panel": "-tripname-",
+      "control": {
+        "type": "typography"
+      }
+    },
+    "tripColor": {
+      "type": "string",
+      "label": "Color",
+      "default": "",
+      "selectors": "%WRAPPER% .wte_enquiry_contact_form .package-name-holder .wp-travel-engine-info",
+      "panel": "-tripname-",
+      "control": {
+        "type": "color",
+        "style": "color"
+      }
+    },
+    "formLabel": {
+      "type": "boolean",
+      "label": "Label",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-label-"
+    },
+    "labelSpacing": {
+      "type": "string",
+      "label": "Spacing",
+      "selectors": [
+        "%WRAPPER% .wte_enquiry_contact_form .row-repeater label",
+        "%WRAPPER% .wte_enquiry_contact_form .row-form.confirm-holder label"
+      ],
+      "default": "8px",
+      "control": {
+        "type": "range",
+        "style": "margin-bottom",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": "0",
+              "max": "50"
+            }
+          ]
+        }
+      },
+      "panel": "-label-"
+    },
+    "inputTypography": {
+      "type": "object",
+      "label": "Typography",
+      "default": {},
+      "selectors": [
+        "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form input:not(.enquiry-submit)",
+        "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form textarea",
+        "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form select"
+      ],
+      "panel": "-input-",
+      "control": {
+        "type": "typography"
+      }
+    },
+    "inputColor": {
+      "type": "object",
+      "label": "Color",
+      "default": {
+        "text": "#2b3034",
+        "placeholder": "#2b3034",
+        "background": "#ffffff"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "text": {
+            "label": "Text",
+            "style": "color",
+            "selectors": [
+              "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form input:not(.enquiry-submit)",
+              "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form textarea",
+              "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form select"
+            ]
+          },
+          "placeholder": {
+            "label": "Placeholder",
+            "style": "color",
+            "selectors": [
+              "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form input::placeholder",
+              "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form textarea::placeholder"
+            ]
+          },
+          "background": {
+            "label": "Background",
+            "style": "background-color",
+            "selectors": [
+              "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form input:not(.enquiry-submit)",
+              "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form textarea",
+              "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form select"
+            ]
+          }
+        }
+      },
+      "panel": "-input-"
+    },
+    "inputBorder": {
+      "type": "object",
+      "label": "Border",
+      "selectors": [
+        "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form input:not(.enquiry-submit)",
+        "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form textarea",
+        "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form select"
+      ],
+      "default": {
+        "width": "1",
+        "style": "solid",
+        "color": "rgba(6, 22, 38, 0.2)"
+      },
+      "control": {
+        "type": "border",
+        "style": "border"
+      },
+      "panel": "-input-"
+    },
+    "inputBorderRadius": {
+      "type": "object",
+      "label": "Border Radius",
+      "selectors": [
+        "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form input:not(.enquiry-submit)",
+        "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form textarea",
+        "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form select"
+      ],
+      "default": {
+        "top": "4px",
+        "right": "4px",
+        "bottom": "4px",
+        "left": "4px"
+      },
+      "control": {
+        "type": "spacing",
+        "style": "borderRadius",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "panel": "-input-"
+    },
+    "inputPadding": {
+      "type": "object",
+      "label": "Padding",
+      "default": {
+        "top": "12px",
+        "right": "12px",
+        "bottom": "12px",
+        "left": "12px"
+      },
+      "selectors": [
+        "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form input:not(.enquiry-submit)",
+        "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form textarea",
+        "%WRAPPER% .wte_enquiry_contact_form-wrap .wte_enquiry_contact_form select"
+      ],
+      "control": {
+        "type": "spacing",
+        "style": "padding"
+      },
+      "panel": "-input-"
+    },
+    "buttonTypography": {
+      "type": "object",
+      "label": "Typography",
+      "default": {},
+      "selectors": "%WRAPPER% .wte_enquiry_contact_form .enquiry-submit",
+      "panel": "-button-",
+      "control": {
+        "type": "typography"
+      }
+    },
+    "buttonLabel": {
+      "type": "string",
+      "label": "Button Label",
+      "default": "Send Email",
+      "control": {
+        "type": "text"
+      },
+      "panel": "-button-"
+    },
+    "btnColor": {
+      "type": "object",
+      "label": "Text Color",
+      "default": {
+        "initial": "#ffffff",
+        "hover": "#ffffff"
+      },
+      "selectors": "%WRAPPER% .wte_enquiry_contact_form .enquiry-submit",
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Initial",
+            "style": "color"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "color:hover"
+          }
+        }
+      },
+      "panel": "-button-"
+    },
+    "btnbgColor": {
+      "type": "object",
+      "label": "Background",
+      "default": {
+        "initial": "#147DFE",
+        "hover": "#147DFE"
+      },
+      "selectors": "%WRAPPER% input.enquiry-submit",
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Initial",
+            "style": "background"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "background:hover"
+          }
+        }
+      },
+      "panel": "-button-"
+    },
+    "buttonAlignment": {
+      "type": "string",
+      "label": "Alignment",
+      "panel": "-button-",
+      "selectors": "%WRAPPER% .wte_enquiry_contact_form .enquiry-submit",
+      "control": {
+        "type": "alignment"
+      },
+      "default": "left"
+    },
+    "fullWidth": {
+      "type": "boolean",
+      "label": "Full Width",
+      "default": false,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-button-"
+    },
+    "buttonBorder": {
+      "type": "object",
+      "label": "Border",
+      "default": {
+        "width": "1",
+        "style": "none",
+        "color": "#000000"
+      },
+      "selectors": "%WRAPPER% .wte_enquiry_contact_form .enquiry-submit",
+      "control": {
+        "type": "border"
+      },
+      "panel": "-button-"
+    },
+    "buttonBorderRadius": {
+      "type": "object",
+      "label": "Border Radius",
+      "default": {
+        "top": "4px",
+        "right": "4px",
+        "bottom": "4px",
+        "left": "4px"
+      },
+      "selectors": "%WRAPPER% .wte_enquiry_contact_form .enquiry-submit",
+      "control": {
+        "type": "spacing",
+        "style": "borderRadius",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "panel": "-button-"
+    },
+    "buttonPadding": {
+      "type": "object",
+      "label": "Padding",
+      "default": {
+        "top": "14",
+        "right": "32",
+        "bottom": "14",
+        "left": "32",
+        "unit": "px"
+      },
+      "selectors": "%WRAPPER% .wte_enquiry_contact_form .enquiry-submit",
+      "control": {
+        "type": "spacing",
+        "style": "padding"
+      },
+      "panel": "-button-"
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "panels": {
+        "-form-": {
+          "title": "Form"
+        },
+        "-label-": {
+          "title": "Label"
+        },
+        "-input-": {
+          "title": "Input"
+        },
+        "-button-": {
+          "title": "Button"
+        },
+        "-tripname-": {
+          "title": "Trip Name"
+        }
+      }
+    }
+  },
+  "viewScript": [
+    "parsley"
+  ],
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

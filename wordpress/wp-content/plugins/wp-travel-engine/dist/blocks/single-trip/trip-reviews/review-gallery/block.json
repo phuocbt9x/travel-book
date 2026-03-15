@@ -1,0 +1,139 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/review-gallery",
+  "version": "1.0.0",
+  "title": "Review Gallery",
+  "category": "widgets",
+  "icon": "gallery",
+  "description": "Reviews",
+  "usesContext": [
+    "commentId"
+  ],
+  "ancestor": [
+    "core/comments"
+  ],
+  "attributes": {
+    "imageGap": {
+      "type": "string",
+      "label": "Image Gap",
+      "panel": "-gallery-",
+      "default": "6px",
+      "control": {
+        "type": "range",
+        "style": "gap",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 1,
+              "max": 50
+            },
+            {
+              "unit": "em",
+              "min": 1,
+              "max": 10
+            },
+            {
+              "unit": "rem",
+              "min": 1,
+              "max": 10
+            }
+          ]
+        }
+      },
+      "selectors": "%WRAPPER% .trip-block-review-gallery"
+    },
+    "imageRoundness": {
+      "type": "string",
+      "label": "Image Roundness",
+      "panel": "-gallery-",
+      "default": "2px",
+      "control": {
+        "type": "range",
+        "style": "border-radius",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "selectors": "%WRAPPER% .trip-block-review-image"
+    },
+    "imageHeight": {
+      "type": "string",
+      "label": "Image Height",
+      "panel": "-gallery-",
+      "default": "56px",
+      "control": {
+        "type": "range",
+        "style": "height",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 1,
+              "max": 500
+            },
+            {
+              "unit": "%",
+              "min": 1,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "selectors": "%WRAPPER% .trip-block-review-image"
+    },
+    "imageWidth": {
+      "type": "string",
+      "label": "Image Width",
+      "panel": "-gallery-",
+      "default": "90px",
+      "control": {
+        "type": "range",
+        "style": "max-width",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 1,
+              "max": 500
+            },
+            {
+              "unit": "%",
+              "min": 1,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "selectors": "%WRAPPER% .trip-block-review-image"
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "colors": {
+        "textColor": false,
+        "link": false
+      },
+      "panels": {
+        "-gallery-": {
+          "title": "Gallery"
+        }
+      }
+    }
+  },
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

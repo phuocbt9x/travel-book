@@ -1,0 +1,94 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/trip-discount-badge",
+  "version": "1.0.0",
+  "title": "Trip Discount Badge",
+  "category": "widgets",
+  "icon": "money-alt",
+  "description": "Prompt visitors to add discount badge.",
+  "attributes": {
+    "typography": {
+      "type": "object",
+      "selectors": "%WRAPPER% .wpte-bf-discount-tag"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#fff",
+      "selectors": "%WRAPPER% .wpte-bf-discount-tag"
+    },
+    "background": {
+      "type": "string",
+      "default": "#ea7810",
+      "selectors": "%WRAPPER% .wpte-bf-discount-tag"
+    },
+    "border": {
+      "type": "object",
+      "selectors": "%WRAPPER% .wpte-bf-discount-tag"
+    },
+    "boxShadow": {
+      "type": "object",
+      "selectors": "%WRAPPER% .wpte-bf-discount-tag"
+    },
+    "padding": {
+      "type": "object",
+      "default": {
+        "top": "5.5px",
+        "right": "10px",
+        "bottom": "5.5px",
+        "left": "10px"
+      },
+      "selectors": "%WRAPPER% .wpte-bf-discount-tag"
+    },
+    "borderRadius": {
+      "type": "object",
+      "default": {
+        "top": "14px",
+        "right": "14px",
+        "bottom": "14px",
+        "left": "14px"
+      },
+      "selectors": "%WRAPPER% .wpte-bf-discount-tag"
+    },
+    "discountLabel": {
+      "type": "string",
+      "default": "%discount_percentage% Off",
+      "control": {
+        "type": "text",
+        "description": "Add %discount_percentage% to display discount percentage."
+      },
+      "panel": "-discount-"
+    },
+    "alignment": {
+      "type": "string",
+      "default": "left",
+      "label": "Alignment",
+      "control": {
+        "type": "alignment",
+        "style": "text-align"
+      },
+      "selectors": "%WRAPPER%",
+      "panel": "-discount-"
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "colors": {
+        "link": false
+      },
+      "border": true,
+      "spacing": {
+        "margin": true,
+        "padding": true
+      },
+      "panels": {
+        "-discount-": {
+          "title": "Label"
+        }
+      }
+    }
+  },
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

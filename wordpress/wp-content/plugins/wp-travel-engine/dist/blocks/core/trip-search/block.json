@@ -1,0 +1,91 @@
+{
+  "apiVersion": 3,
+  "name": "wptravelengine/trip-search",
+  "category": "widgets",
+  "title": "WP Travel Engine - Trip Search",
+  "description": "Display the Search filter horizontally or vertically and add search criteria such as destination, duration, price, activities, etc.",
+  "script": [],
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "subtitle": {
+      "type": "string",
+      "default": ""
+    },
+    "titleLevel": {
+      "type": "number",
+      "default": 2
+    },
+    "searchFormOrientation": {
+      "type": "boolean",
+      "default": true
+    },
+    "searchFormLayout": {
+      "type": "string",
+      "default": "horizontal"
+    },
+    "searchButtonLabel": {
+      "type": "string",
+      "default": "Search"
+    },
+    "searchFilters": {
+      "type": "object",
+      "default": {
+        "destination": {
+          "label": "Destination",
+          "default": "Destination",
+          "show": true,
+          "order": 1,
+          "icon": "marker"
+        },
+        "trip_types": {
+          "label": "Trip Types",
+          "default": "Trip Types",
+          "show": false,
+          "order": 2,
+          "icon": "cycle"
+        },
+        "activities": {
+          "label": "Activity",
+          "default": "Activity",
+          "show": true,
+          "order": 3,
+          "icon": "cycle"
+        },
+        "duration": {
+          "label": "Duration",
+          "default": "Duration",
+          "show": true,
+          "order": 4,
+          "icon": "duration"
+        },
+        "price": {
+          "label": "Price",
+          "default": "Price",
+          "show": true,
+          "order": 5,
+          "icon": "money"
+        }
+      }
+    },
+    "layoutFilters": {
+      "type": "object",
+      "default": {
+        "showDropdownIcon": true,
+        "showIcons": true,
+        "showFilterLabels": true,
+        "showDestinations": true,
+        "showDateSelector": false,
+        "showActivities": true,
+        "showDurationRange": true,
+        "showPriceRange": true,
+        "showTitle": true,
+        "showSubtitle": true
+      }
+    }
+  },
+  "editorScript": [],
+  "render": "file:./block.php"
+}

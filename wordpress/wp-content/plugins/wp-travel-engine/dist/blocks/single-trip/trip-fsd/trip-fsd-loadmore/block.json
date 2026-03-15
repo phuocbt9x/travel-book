@@ -1,0 +1,153 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/trip-fsd-loadmore",
+  "title": "Trip FSD Load More",
+  "description": "Prompt visitors to add load more button in FSD.",
+  "category": "widgets",
+  "icon": "calendar-alt",
+  "parent": [
+    "wptravelenginetripblocks/trip-fixed-starting-date"
+  ],
+  "attributes": {
+    "textColor": {
+      "type": "object",
+      "default": {
+        "initial": "#147dfe",
+        "hover": "#fff"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Text",
+            "style": "color"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "color:hover"
+          }
+        }
+      },
+      "selectors": [
+        "%WRAPPER% .load-more",
+        "%WRAPPER% .show-less"
+      ]
+    },
+    "background": {
+      "type": "object",
+      "default": {
+        "initial": "#ffffff",
+        "hover": "#147dfe"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Background",
+            "style": "background"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "background:hover"
+          }
+        }
+      },
+      "selectors": [
+        "%WRAPPER% .load-more",
+        "%WRAPPER% .show-less"
+      ]
+    },
+    "loadMore": {
+      "type": "string",
+      "default": "Load More"
+    },
+    "showLess": {
+      "type": "string",
+      "default": "Show Less"
+    },
+    "alignment": {
+      "type": "string",
+      "label": "Alignment",
+      "default": "center",
+      "control": {
+        "type": "alignment",
+        "style": "justify-content"
+      },
+      "selectors": "%WRAPPER%",
+      "panel": "-button-"
+    },
+    "padding": {
+      "type": "object",
+      "default": {
+        "top": "16px",
+        "right": "16px",
+        "bottom": "16px",
+        "left": "16px"
+      },
+      "selectors": [
+        "%WRAPPER% .load-more",
+        "%WRAPPER% .show-less"
+      ]
+    },
+    "margin": {
+      "type": "object",
+      "default": {
+        "top": "32px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      },
+      "selectors": [
+        "%WRAPPER% .load-more",
+        "%WRAPPER% .show-less"
+      ]
+    },
+    "border": {
+      "type": "object",
+      "default": {
+        "width": "1",
+        "color": "#147dfe",
+        "style": "solid"
+      },
+      "selectors": [
+        "%WRAPPER% .load-more",
+        "%WRAPPER% .show-less"
+      ]
+    },
+    "borderRadius": {
+      "type": "object",
+      "default": {
+        "top": "4px",
+        "right": "4px",
+        "bottom": "4px",
+        "left": "4px"
+      },
+      "selectors": [
+        "%WRAPPER% .load-more",
+        "%WRAPPER% .show-less"
+      ]
+    },
+    "boxShadow": {
+      "type": "object",
+      "selectors": [
+        "%WRAPPER% .load-more",
+        "%WRAPPER% .show-less"
+      ]
+    }
+  },
+  "supports": {
+    "wptravelenginetripblocks": {
+      "colors": {
+        "linkColor": false
+      },
+      "panels": {
+        "-button-": {
+          "title": "Button"
+        }
+      }
+    }
+  },
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

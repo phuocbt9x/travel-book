@@ -1,0 +1,183 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/faqs",
+  "version": "1.0.0",
+  "title": "Trip FAQs",
+  "icon": "editor-help",
+  "description": "Customize FAQ sections that grab users’ attention, answer questions, and boost your website’s SEO.",
+  "category": "widgets",
+  "script": [],
+  "attributes": {
+    "iconColor": {
+      "type": "string",
+      "label": "Toggle Color",
+      "default": "#147DFE",
+      "control": {
+        "type": "color"
+      },
+      "variableName": "primary-color",
+      "selectors": "%WRAPPER% .faq-row .rotator",
+      "panel": "-faqs-"
+    },
+    "toggleSpacing": {
+      "type": "string",
+      "label": "Toggle Spacing",
+      "panel": "-faqs-",
+      "default": "0px",
+      "control": {
+        "type": "range",
+        "style": "right",
+        "controlAttribute": {
+          "min": 0,
+          "max": 100
+        }
+      },
+      "selectors": "%WRAPPER% .faq-row .rotator"
+    },
+    "itemSpacing": {
+      "type": "string",
+      "label": "Items Spacing",
+      "panel": "-faqs-",
+      "default": "48px",
+      "control": {
+        "type": "range",
+        "style": "margin-bottom",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "selectors": "%WRAPPER% .faq-row"
+    },
+    "showDivider": {
+      "type": "boolean",
+      "default": true,
+      "label": "Divider",
+      "panel": "-faqs-",
+      "control": {
+        "type": "switch"
+      }
+    },
+    "dividerColor": {
+      "type": "object",
+      "label": "Items Separator",
+      "default": {
+        "initial": "#040F1A1A"
+      },
+      "selectors": "%WRAPPER% .faq-row",
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Divider",
+            "style": "border-color"
+          }
+        }
+      },
+      "panel": "-faqs-"
+    },
+    "titleTypography": {
+      "type": "object",
+      "label": "Typography",
+      "panel": "-title-",
+      "default": {},
+      "control": {
+        "type": "typography"
+      },
+      "selectors": "%WRAPPER% .faq-title"
+    },
+    "titleColor": {
+      "type": "string",
+      "label": "Color",
+      "default": "#000000",
+      "control": {
+        "type": "color",
+        "style": "color"
+      },
+      "selectors": "%WRAPPER% .faq-title",
+      "panel": "-title-"
+    },
+    "titleBackground": {
+      "type": "string",
+      "default": "",
+      "label": "Background",
+      "panel": "-title-",
+      "selectors": "%WRAPPER% .faq-row .accordion-tabs-toggle",
+      "control": {
+        "type": "color",
+        "style": "background-color"
+      }
+    },
+    "titlePadding": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      },
+      "label": "Padding",
+      "panel": "-title-",
+      "selectors": "%WRAPPER% .faq-row .accordion-tabs-toggle",
+      "control": {
+        "type": "spacing",
+        "style": "padding"
+      }
+    },
+    "contentBackground": {
+      "type": "string",
+      "default": "",
+      "label": "Background",
+      "panel": "-content-",
+      "selectors": "%WRAPPER% .faq-row .faq-content",
+      "control": {
+        "type": "color",
+        "style": "background-color"
+      }
+    },
+    "contentPadding": {
+      "type": "object",
+      "default": {
+        "top": "16px",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      },
+      "label": "Padding",
+      "panel": "-content-",
+      "selectors": "%WRAPPER% .faq-row .faq-content",
+      "control": {
+        "type": "spacing",
+        "style": "padding"
+      }
+    }
+  },
+  "supports": {
+    "wptravelenginetripblocks": {
+      "colors": {
+        "link": false,
+        "background": true,
+        "text": true
+      },
+      "panels": {
+        "-faqs-": {
+          "title": "FAQ's"
+        },
+        "-title-": {
+          "title": "Title"
+        },
+        "-content-": {
+          "title": "Content"
+        }
+      }
+    }
+  },
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

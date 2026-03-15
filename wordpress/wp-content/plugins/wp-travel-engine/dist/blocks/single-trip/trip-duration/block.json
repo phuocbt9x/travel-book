@@ -1,0 +1,157 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/trip-duration",
+  "version": "1.0.0",
+  "icon": "calendar",
+  "title": "Trip Duration",
+  "category": "widgets",
+  "description": "Use the Trip Duration block to show your trip duration.",
+  "example": {},
+  "script": [],
+  "attributes": {
+    "textColor": {
+      "type": "string",
+      "default": "#000000",
+      "selectors": "%WRAPPER% .wte-title-duration"
+    },
+    "background": {
+      "type": "string",
+      "default": "#ffffff",
+      "selectors": "%WRAPPER% .wte-title-duration"
+    },
+    "padding": {
+      "type": "object",
+      "selectors": "%WRAPPER% .wte-title-duration"
+    },
+    "margin": {
+      "type": "object",
+      "selectors": "%WRAPPER% .wte-title-duration"
+    },
+    "border": {
+      "type": "object",
+      "selectors": "%WRAPPER% .wte-title-duration"
+    },
+    "boxShadow": {
+      "type": "object",
+      "selectors": "%WRAPPER% .wte-title-duration",
+      "default": {
+        "enable": true,
+        "xOffset": "0px",
+        "yOffset": "4px",
+        "blur": "8px",
+        "spread": "0px",
+        "position": "outline",
+        "color": "rgba(0,0,0, 0.3)"
+      }
+    },
+    "borderRadius": {
+      "type": "object",
+      "selectors": "%WRAPPER% .wte-title-duration"
+    },
+    "durationTypography": {
+      "type": "object",
+      "label": "Typography",
+      "selectors": "%WRAPPER% .wte-title-duration .duration",
+      "default": {},
+      "control": {
+        "type": "typography"
+      },
+      "panel": "-duration-"
+    },
+    "durationColors": {
+      "type": "object",
+      "default": {
+        "textColor": "#ffffff",
+        "background": "#147dfe"
+      },
+      "label": "Color",
+      "selectors": "%WRAPPER% .wte-title-duration .duration",
+      "control": {
+        "type": "color",
+        "labels": {
+          "textColor": {
+            "label": "Text",
+            "style": "color"
+          },
+          "background": {
+            "label": "Background",
+            "style": "background-color"
+          }
+        }
+      },
+      "panel": "-duration-"
+    },
+    "durationBorder": {
+      "type": "object",
+      "label": "Border",
+      "default": {
+        "color": "",
+        "width": "1",
+        "style": "none"
+      },
+      "selectors": "%WRAPPER% .wte-title-duration .duration",
+      "control": {
+        "type": "border"
+      },
+      "panel": "-duration-"
+    },
+    "alignment": {
+      "type": "string",
+      "label": "Alignment",
+      "panel": "-duration-",
+      "control": {
+        "type": "alignment",
+        "style": "justify-content"
+      },
+      "default": "left",
+      "selectors": "%WRAPPER% .wte-duration-container"
+    },
+    "durationPadding": {
+      "type": "object",
+      "label": "Padding",
+      "panel": "-duration-",
+      "control": {
+        "type": "spacing",
+        "style": "padding",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 50
+            }
+          ]
+        }
+      },
+      "default": {
+        "top": "0px",
+        "right": "16px",
+        "bottom": "0px",
+        "left": "16px"
+      },
+      "selectors": "%WRAPPER% .wte-duration-container .wte-title-duration .duration"
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "colors": {
+        "link": false
+      },
+      "border": true,
+      "spacing": {
+        "margin": true,
+        "padding": true
+      },
+      "panels": {
+        "-duration-": {
+          "title": "Duration",
+          "icon": "calendar"
+        }
+      }
+    }
+  },
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

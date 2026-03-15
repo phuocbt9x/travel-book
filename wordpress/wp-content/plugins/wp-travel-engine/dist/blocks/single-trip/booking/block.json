@@ -1,0 +1,62 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/booking",
+  "version": "1.0.0",
+  "title": "Trip Booking",
+  "icon": "cart",
+  "category": "widgets",
+  "description": "Display essential trip details, including price, discount, highlights and availability button.",
+  "script": [],
+  "example": {},
+  "textdomain": "wptravelengine",
+  "attributes": {
+    "formLayout": {
+      "type": "string",
+      "default": "1",
+      "control": {
+        "type": "select",
+        "controlAttribute": {
+          "description": "Pricing Widget Layouts (For smaller devices)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Layout 1"
+            },
+            {
+              "value": "2",
+              "label": "Layout 2"
+            },
+            {
+              "value": "3",
+              "label": "Layout 3"
+            }
+          ]
+        }
+      },
+      "panel": "-form-"
+    },
+    "boxShadow": {
+      "type": "object",
+      "default": {
+        "enable": true,
+        "xOffset": "4px",
+        "yOffset": "6px",
+        "blur": "12px",
+        "spread": "0px",
+        "color": "rgba(94, 70, 8, 0.2)"
+      }
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "typography": false,
+      "panels": {
+        "-form-": {
+          "title": "Layout"
+        }
+      }
+    }
+  }
+}

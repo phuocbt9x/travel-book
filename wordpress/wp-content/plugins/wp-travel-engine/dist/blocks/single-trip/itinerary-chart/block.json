@@ -1,0 +1,148 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/itinerary-altitude-chart",
+  "version": "1.0.0",
+  "title": "Trip Itinerary Altitude Chart",
+  "icon": "chart-line",
+  "description": "Visually represent the trip’s altitude changes throughout the itinerary.",
+  "category": "widgets",
+  "script": [],
+  "supports": {
+    "wptravelenginetripblocks": {
+      "colors": {
+        "link": false
+      },
+      "border": true,
+      "spacing": true,
+      "panels": {
+        "-unit-": {
+          "title": "Unit",
+          "icon": "unit"
+        },
+        "-chart-": {
+          "title": "Chart",
+          "icon": "chart"
+        }
+      }
+    }
+  },
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php",
+  "attributes": {
+    "textColor": {
+      "type": "string",
+      "default": "#147DFE"
+    },
+    "altitudeUnit": {
+      "type": "string",
+      "label": "Altitude Unit",
+      "default": "m",
+      "control": {
+        "type": "select-button",
+        "controlAttribute": {
+          "options": [
+            {
+              "value": "m",
+              "label": "M."
+            },
+            {
+              "value": "ft",
+              "label": "Ft."
+            }
+          ]
+        }
+      },
+      "panel": "-unit-"
+    },
+    "showAltitudeUnit": {
+      "type": "boolean",
+      "label": "Show Altitude Unit",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-unit-"
+    },
+    "altitudeUnitLabel": {
+      "type": "string",
+      "label": "Altitude Unit Label",
+      "default": "Altitude Unit",
+      "control": {
+        "type": "text"
+      },
+      "panel": "-unit-"
+    },
+    "showX": {
+      "type": "boolean",
+      "label": "Show X-Axis",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-chart-"
+    },
+    "showY": {
+      "type": "boolean",
+      "label": "Show Y-Axis",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-chart-"
+    },
+    "showLG": {
+      "type": "boolean",
+      "label": "Show Line Graph",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-chart-"
+    },
+    "xScaleLabel": {
+      "type": "string",
+      "label": "X-Axis Scale Label",
+      "default": "Days",
+      "control": {
+        "type": "text"
+      },
+      "panel": "-chart-"
+    },
+    "yScaleLabel": {
+      "type": "string",
+      "label": "Y-Axis Scale Label",
+      "default": "Altitude",
+      "control": {
+        "type": "text"
+      },
+      "panel": "-chart-"
+    },
+    "tension": {
+      "type": "number",
+      "label": "Line Tension",
+      "default": 0,
+      "control": {
+        "type": "input-number",
+        "controlAttribute": {
+          "min": 0,
+          "max": 10
+        }
+      },
+      "panel": "-chart-"
+    },
+    "themeColor": {
+      "type": "string",
+      "label": "Theme Color",
+      "default": "#147DFE",
+      "control": {
+        "type": "color"
+      },
+      "panel": "-chart-"
+    }
+  },
+  "viewScript": [
+    "wte-chart",
+    "wte-chart-datalabels"
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/star-ratings",
+  "version": "1.0.0",
+  "title": "Star Ratings",
+  "category": "widgets",
+  "icon": "star-filled",
+  "description": "Display star ratings to establish credibility and build trust with your audience.",
+  "script": [],
+  "attributes": {
+    "stars": {
+      "type": "object",
+      "label": "Stars",
+      "default": {
+        "active": "#EBAD34",
+        "inactive": "#cccccc"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "active": {
+            "label": "Active",
+            "style": "color",
+            "selectors": "%WRAPPER% .trip-rating-stars-rated-group"
+          },
+          "inactive": {
+            "label": "Inactive",
+            "style": "color",
+            "selectors": "%WRAPPER% .trip-rating-stars-placeholder-group"
+          }
+        }
+      }
+    },
+    "alignment": {
+      "type": "string",
+      "label": "Alignment",
+      "panel": "-starratings-",
+      "control": {
+        "type": "alignment",
+        "style": "text-align"
+      },
+      "default": "center",
+      "selectors": "%WRAPPER% .trip-rating-stars-container"
+    },
+    "starsSize": {
+      "type": "string",
+      "label": "Star Size",
+      "panel": "-starratings-",
+      "default": "20px",
+      "control": {
+        "type": "range",
+        "style": "font-size",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 1,
+              "max": 100
+            },
+            {
+              "unit": "em",
+              "min": 1,
+              "max": 10
+            },
+            {
+              "unit": "rem",
+              "min": 1,
+              "max": 10
+            }
+          ]
+        }
+      },
+      "selectors": "%WRAPPER% .trip-rating-stars"
+    },
+    "starsGap": {
+      "type": "string",
+      "label": "Stars Gap",
+      "panel": "-starratings-",
+      "default": "4px",
+      "control": {
+        "type": "range",
+        "style": "gap",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 1,
+              "max": 50
+            },
+            {
+              "unit": "em",
+              "min": 1,
+              "max": 10
+            },
+            {
+              "unit": "rem",
+              "min": 1,
+              "max": 10
+            }
+          ]
+        }
+      },
+      "selectors": "%WRAPPER% .trip-rating-stars-container"
+    },
+    "enableScaleText": {
+      "type": "boolean",
+      "default": false,
+      "label": "Enable",
+      "panel": "-rating-scale-",
+      "control": {
+        "type": "switch"
+      }
+    },
+    "scaleColor": {
+      "type": "object",
+      "default": {
+        "color": "#ffffff",
+        "background": "#12B76A"
+      },
+      "label": "Text Color",
+      "selectors": "%WRAPPER% .trip-rating-scale-text",
+      "control": {
+        "type": "color",
+        "labels": {
+          "color": {
+            "label": "Text",
+            "style": "color"
+          },
+          "background": {
+            "label": "Background",
+            "style": "background-color"
+          }
+        }
+      },
+      "panel": "-rating-scale-"
+    },
+    "typography": {
+      "type": "object",
+      "default": {
+        "size": {
+          "desktop": "12px",
+          "tablet": "12px",
+          "mobile": "12px"
+        }
+      },
+      "selectors": "%WRAPPER% .trip-rating-scale-text"
+    },
+    "scaleRoundness": {
+      "type": "string",
+      "label": "Roundness",
+      "selectors": "%WRAPPER% .trip-rating-scale-text",
+      "default": "2px",
+      "control": {
+        "type": "range",
+        "style": "border-radius",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "panel": "-rating-scale-"
+    },
+    "scalePadding": {
+      "type": "object",
+      "label": "Padding",
+      "selectors": "%WRAPPER% .trip-rating-scale-text",
+      "default": {
+        "top": "2px",
+        "right": "12px",
+        "bottom": "2px",
+        "left": "12px"
+      },
+      "control": {
+        "type": "spacing",
+        "style": "padding"
+      },
+      "panel": "-rating-scale-"
+    },
+    "scaleTextPosition": {
+      "type": "string",
+      "default": "right",
+      "label": "Placement",
+      "control": {
+        "type": "select",
+        "controlAttribute": {
+          "options": [
+            {
+              "label": "Top",
+              "value": "top"
+            },
+            {
+              "label": "Right",
+              "value": "right"
+            },
+            {
+              "label": "Bottom",
+              "value": "bottom"
+            },
+            {
+              "label": "Left",
+              "value": "left"
+            }
+          ]
+        }
+      },
+      "panel": "-rating-scale-"
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "colors": {
+        "textColor": false,
+        "link": false
+      },
+      "panels": {
+        "-starratings-": {
+          "title": "Star Ratings",
+          "icon": "star-filled"
+        },
+        "-rating-scale-": {
+          "title": "Rating Scale Text"
+        }
+      }
+    }
+  },
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

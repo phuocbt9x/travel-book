@@ -1,0 +1,15 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginepagesblocks/archive-trip",
+  "version": "1.0.0",
+  "title": "Trip Archive",
+  "category": "widgets",
+  "description": "Trip Archive Page.",
+  "attributes": {},
+  "supports": {
+    "align": false
+  },
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

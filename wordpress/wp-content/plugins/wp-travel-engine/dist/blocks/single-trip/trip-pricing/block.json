@@ -1,0 +1,208 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/trip-pricing",
+  "version": "1.0.0",
+  "title": "Trip Pricing",
+  "icon": "money-alt",
+  "description": "Prompt visitors to display trip pricing info.",
+  "category": "widgets",
+  "attributes": {
+    "regularTypography": {
+      "type": "object",
+      "label": "Price Typography",
+      "default": {},
+      "panel": "-prices-",
+      "selectors": "%WRAPPER% .wpte-bf-price .wpte-bf-reg-price del",
+      "control": {
+        "type": "typography"
+      }
+    },
+    "priceTypography": {
+      "type": "object",
+      "label": "Sale Price Typography",
+      "panel": "-prices-",
+      "default": {},
+      "selectors": "%WRAPPER% .wpte-bf-offer-price .wpte-bf-offer-amount",
+      "control": {
+        "type": "typography"
+      }
+    },
+    "enableDivider": {
+      "type": "boolean",
+      "default": false,
+      "label": "Divider",
+      "panel": "-prices-",
+      "control": {
+        "type": "switch"
+      }
+    },
+    "dividerColor": {
+      "type": "string",
+      "default": "rgba(4, 15, 26, 0.1)",
+      "label": "Divider Color",
+      "panel": "-prices-",
+      "selectors": "%WRAPPER% .wpte-bf-price-wrap.has-divider .wpte-bf-price:nth-child(2n)::before",
+      "control": {
+        "type": "color",
+        "style": "border-color"
+      }
+    },
+    "dividerSpacing": {
+      "type": "string",
+      "default": "16px",
+      "label": "Divider Spacing",
+      "panel": "-prices-",
+      "selectors": "%WRAPPER% .wpte-bf-price-wrap.has-divider",
+      "control": {
+        "type": "range",
+        "style": "--gap",
+        "controlAttribute": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    },
+    "price": {
+      "type": "object",
+      "label": "Price",
+      "default": {
+        "regular": "rgba(0,0,0,0.4)",
+        "sale": "#061626"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "regular": {
+            "label": "Regular Price",
+            "style": "color",
+            "selectors": "%WRAPPER% .wpte-bf-price-wrap .wpte-bf-price del"
+          },
+          "sale": {
+            "label": "Sale Price",
+            "style": "color",
+            "selectors": "%WRAPPER% .wpte-bf-price-wrap .wpte-bf-price ins"
+          }
+        }
+      }
+    },
+    "prefixTextColor": {
+      "type": "object",
+      "label": "Prefix / Suffix Text",
+      "default": {
+        "prefix": "#000000",
+        "suffix": "#00000066"
+      },
+      "control": {
+        "type": "color",
+        "style": "color",
+        "labels": {
+          "prefix": {
+            "label": "Prefix Text",
+            "selectors": "%WRAPPER% .wpte-bf-price .wpte-bf-reg-price",
+            "style": "color"
+          },
+          "suffix": {
+            "label": "Suffix Text",
+            "selectors": "%WRAPPER% .wpte-bf-price .wpte-bf-offer-price:not(.wpte-bf-offer-amount)",
+            "style": "color"
+          }
+        }
+      }
+    },
+    "displayFormat": {
+      "type": "string",
+      "label": "Amount Display Format",
+      "default": "%CURRENCY_SYMBOL%%FORMATED_AMOUNT%",
+      "control": {
+        "type": "textarea",
+        "help": "Amount Display format. Available tags: %CURRENCY_CODE%, %CURRENCY_SYMBOL%, %AMOUNT%, %FORMATED_AMOUNT%"
+      },
+      "panel": "-display-"
+    },
+    "pricePrefix": {
+      "type": "string",
+      "label": "Prefix for Price",
+      "default": "From %regular_price%",
+      "control": {
+        "type": "text"
+      },
+      "panel": "-display-"
+    },
+    "priceDisplayFormat": {
+      "type": "string",
+      "label": "Price Per Format",
+      "default": "%sale_price%/ %price_category%",
+      "control": {
+        "type": "text"
+      },
+      "panel": "-display-"
+    },
+    "background": {
+      "type": "string",
+      "default": "",
+      "selectors": "%WRAPPER% .wpte-bf-price-wrap"
+    },
+    "border": {
+      "type": "object",
+      "default": {},
+      "selectors": "%WRAPPER% .wpte-bf-price-wrap"
+    },
+    "boxShadow": {
+      "type": "object",
+      "default": {},
+      "selectors": "%WRAPPER% .wpte-bf-price-wrap"
+    },
+    "borderRadius": {
+      "type": "object",
+      "default": {},
+      "selectors": "%WRAPPER% .wpte-bf-price-wrap"
+    },
+    "padding": {
+      "type": "object",
+      "default": {
+        "top": "24px",
+        "right": "",
+        "bottom": "24px",
+        "left": ""
+      },
+      "selectors": "%WRAPPER% .wpte-bf-price-wrap"
+    },
+    "margin": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      },
+      "selectors": "%WRAPPER% .wpte-bf-price-wrap"
+    },
+    "packageCategories": {
+      "type": "array"
+    },
+    "priceCategory": {
+      "type": "array"
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "colors": {
+        "textColor": false,
+        "link": false
+      },
+      "border": false,
+      "panels": {
+        "-prices-": {
+          "title": "Prices"
+        },
+        "-display-": {
+          "title": "Display"
+        }
+      }
+    }
+  },
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

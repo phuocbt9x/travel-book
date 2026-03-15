@@ -1,0 +1,199 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/stars-bar-graph",
+  "version": "1.0.0",
+  "title": "Stars Bar Graph",
+  "category": "widgets",
+  "icon": "chart-bar",
+  "description": "Transform customer ratings into an easy-to-understand bar graph.",
+  "script": [],
+  "attributes": {
+    "typography": {
+      "type": "object",
+      "selectors": "%WRAPPER% .trip-stars-bar-graph"
+    },
+    "starsBar": {
+      "type": "object",
+      "label": "Colors",
+      "default": {
+        "very-happy": "#66DAB0",
+        "happy": "#6FEBA1",
+        "neutral": "#F3CE85",
+        "sad": "#F3B881",
+        "angry": "#EE7874",
+        "background": "#f1f1f1"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "very-happy": {
+            "label": "Five Stars",
+            "variableName": "--progress-color",
+            "selectors": "%WRAPPER% .progress-bar-very-happy"
+          },
+          "happy": {
+            "label": "Four Stars",
+            "variableName": "--progress-color",
+            "selectors": "%WRAPPER% .progress-bar-happy"
+          },
+          "neutral": {
+            "label": "Three Stars",
+            "variableName": "--progress-color",
+            "selectors": "%WRAPPER% .progress-bar-neutral"
+          },
+          "sad": {
+            "label": "Two Stars",
+            "variableName": "--progress-color",
+            "selectors": "%WRAPPER% .progress-bar-sad"
+          },
+          "angry": {
+            "label": "One Star",
+            "variableName": "--progress-color",
+            "selectors": "%WRAPPER% .progress-bar-angry"
+          },
+          "background": {
+            "label": "Background",
+            "style": "background-color",
+            "selectors": "%WRAPPER% .trip-stars-bar-progress-bar"
+          }
+        },
+        "controlAttribute": {
+          "direction": "inline"
+        }
+      },
+      "panel": "-starbars-"
+    },
+    "progressBarWeight": {
+      "type": "string",
+      "label": "Weight",
+      "panel": "-starbars-",
+      "default": "12px",
+      "control": {
+        "type": "range",
+        "style": "bar-weight",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 1,
+              "max": 50
+            },
+            {
+              "unit": "em",
+              "min": 1,
+              "max": 10
+            },
+            {
+              "unit": "rem",
+              "min": 1,
+              "max": 10
+            }
+          ]
+        }
+      },
+      "selectors": "%WRAPPER% .trip-stars-bar-graph"
+    },
+    "itemsGap": {
+      "type": "string",
+      "label": "Items Gap",
+      "panel": "-starbars-",
+      "default": "16px",
+      "control": {
+        "type": "range",
+        "style": "items-gap",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 1,
+              "max": 50
+            },
+            {
+              "unit": "em",
+              "min": 1,
+              "max": 10
+            },
+            {
+              "unit": "rem",
+              "min": 1,
+              "max": 10
+            }
+          ]
+        }
+      },
+      "selectors": "%WRAPPER% .trip-stars-bar-graph"
+    },
+    "textWidth": {
+      "type": "string",
+      "panel": "-starbars-",
+      "default": "100px",
+      "control": {
+        "type": "range",
+        "style": "min-width",
+        "controlAttribute": {
+          "description": "Minimum width of rating scale text.",
+          "units": [
+            {
+              "unit": "px",
+              "min": 1,
+              "max": 300
+            },
+            {
+              "unit": "em",
+              "min": 1,
+              "max": 5
+            }
+          ]
+        }
+      },
+      "selectors": "%WRAPPER% .trip-stars-bar-text"
+    },
+    "showIcon": {
+      "type": "boolean",
+      "label": "Show Icon",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-additional-"
+    },
+    "showText": {
+      "type": "boolean",
+      "label": "Show Text",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-additional-"
+    },
+    "showPercent": {
+      "type": "boolean",
+      "label": "Show Percentage",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-additional-"
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "colors": {
+        "link": false
+      },
+      "panels": {
+        "-starbars-": {
+          "title": "Progress Bar",
+          "icon": "star-filled"
+        },
+        "-additional-": {
+          "title": "Additional"
+        }
+      }
+    }
+  },
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

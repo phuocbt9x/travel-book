@@ -1,0 +1,225 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/trip-facts",
+  "version": "1.0.0",
+  "title": "Trip Facts",
+  "icon": "list-view",
+  "description": "Showcase key details like trip type, meals, and transportation visually appealingly.",
+  "category": "widgets",
+  "example": {},
+  "script": [],
+  "attributes": {
+    "padding": {
+      "type": "object",
+      "selectors": "%WRAPPER% .secondary-trip-info"
+    },
+    "margin": {
+      "type": "object",
+      "selectors": "%WRAPPER% .secondary-trip-info"
+    },
+    "border": {
+      "type": "object",
+      "selectors": "%WRAPPER% .secondary-trip-info"
+    },
+    "background": {
+      "type": "string",
+      "selectors": "%WRAPPER% .secondary-trip-info",
+      "default": "#ffffff"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "borderRadius": {
+      "type": "object",
+      "selectors": "%WRAPPER% .secondary-trip-info"
+    },
+    "boxShadow": {
+      "type": "object",
+      "selectors": "%WRAPPER% .secondary-trip-info"
+    },
+    "verticalAlignment": {
+      "type": "string",
+      "label": "Vertical Alignment",
+      "default": "top",
+      "selectors": "%WRAPPER% .trip-facts-value .icon-holder",
+      "control": {
+        "type": "select",
+        "controlAttribute": {
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            }
+          ],
+          "direction": "horizontal"
+        }
+      },
+      "panel": "-tripfacts-"
+    },
+    "alignment": {
+      "type": "string",
+      "label": "Alignment",
+      "panel": "-tripfacts-",
+      "control": {
+        "type": "alignment",
+        "style": "text-align"
+      },
+      "default": "left",
+      "selectors": "%WRAPPER% .trip-facts-value"
+    },
+    "showIcon": {
+      "type": "boolean",
+      "label": "Show Icon",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-factsicon-"
+    },
+    "columns": {
+      "type": "number",
+      "label": "Columns",
+      "default": 3,
+      "control": {
+        "type": "input-number",
+        "controlAttribute": {
+          "min": 1,
+          "max": 4
+        }
+      },
+      "panel": "-tripfacts-"
+    },
+    "factsTitleTypography": {
+      "type": "object",
+      "label": "Typography",
+      "panel": "-factstitle-",
+      "default": {},
+      "selectors": "%WRAPPER% .trip-facts-value li label",
+      "control": {
+        "type": "typography"
+      }
+    },
+    "factsTitleColor": {
+      "type": "string",
+      "label": "Color",
+      "default": "#0000008F",
+      "selectors": "%WRAPPER% .trip-facts-value li label",
+      "control": {
+        "type": "color",
+        "style": "color"
+      },
+      "panel": "-factstitle-"
+    },
+    "typography": {
+      "type": "object",
+      "selectors": "%WRAPPER% .trip-facts-text .value"
+    },
+    "iconColor": {
+      "type": "string",
+      "label": "Icon Color",
+      "default": "#0056F6",
+      "selectors": "%WRAPPER% .trip-facts-value .icon-holder",
+      "control": {
+        "type": "color",
+        "style": "color"
+      },
+      "panel": "-factsicon-"
+    },
+    "iconFontSize": {
+      "type": "string",
+      "label": "Icon Size",
+      "panel": "-factsicon-",
+      "selectors": "%WRAPPER% .trip-facts-value .icon-holder",
+      "default": "16px",
+      "control": {
+        "type": "range",
+        "style": "font-size",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 1,
+              "max": 50
+            },
+            {
+              "unit": "em",
+              "min": 1,
+              "max": 8
+            },
+            {
+              "unit": "rem",
+              "min": 1,
+              "max": 8
+            }
+          ]
+        }
+      }
+    },
+    "iconPosition": {
+      "type": "string",
+      "label": "Icon Position",
+      "default": "left",
+      "selectors": "%WRAPPER% .trip-facts-value .icon-holder",
+      "control": {
+        "type": "select",
+        "controlAttribute": {
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "direction": "horizontal"
+        }
+      },
+      "panel": "-factsicon-"
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "colors": {
+        "link": false
+      },
+      "border": true,
+      "spacing": {
+        "padding": true,
+        "margin": true
+      },
+      "panels": {
+        "-tripfacts-": {
+          "title": "Trip Facts"
+        },
+        "-factstitle-": {
+          "title": "Title"
+        },
+        "-factscontent-": {
+          "title": "Content"
+        },
+        "-factsicon-": {
+          "title": "Icon"
+        }
+      }
+    }
+  },
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}
