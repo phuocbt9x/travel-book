@@ -1,0 +1,145 @@
+services:
+
+  nginx:
+    image: nginx:1.27.4-alpine
+    container_name: nginx
+    depends_on:
+      php-fpm:
+        condition: service_healthy
+    ports:
+      - "${NGINX_HTTP_PORT:-80}:80"
+      - "${NGINX_HTTPS_PORT:-443}:443"
+    restart: unless-stopped
+    environment:
+      - NGINX_ENV=${APP_ENV}
+      - TZ=${TZ}
+    volumes:
+      - wp_app:/var/www/html:ro
+      - ./wordpress/wp-content:/var/www/html/wp-content:ro
+      - ./wordpress/wp-config.php:/var/www/html/wp-config.php:ro
+      - ./infra/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./infra/healthcheck.php:/var/www/health/healthcheck.php:ro
+      - ./${APP_NAME}/logs/nginx:/var/log/nginx
+    networks:
+      - frontend
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1/healthcheck.php || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  php-fpm:
+    build:
+      context: ./infra/php
+      dockerfile: Dockerfile
+    container_name: php-fpm
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      wordpress-app:
+        condition: service_completed_successfully
+    env_file:
+      - .env
+    volumes:
+      - wp_app:/var/www/html
+      - ./wordpress/wp-content:/var/www/html/wp-content
+      - ./wordpress/wp-config.php:/var/www/html/wp-config.php:ro
+      - ./infra/healthcheck.php:/var/www/health/healthcheck.php:ro
+      - ./${APP_NAME}/logs/php:/var/log
+    restart: unless-stopped
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "SCRIPT_NAME=/healthcheck.php SCRIPT_FILENAME=/var/www/health/healthcheck.php REQUEST_METHOD=GET cgi-fcgi -bind -connect 127.0.0.1:9000 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  wordpress-app:
+    build:
+      context: ./wordpress
+      dockerfile: core/Dockerfile
+    container_name: wordpress-app
+    env_file:
+      - .env
+    volumes:
+      - wp_app:/var/www/html
+      - ./wordpress/wp-content:/var/www/html/wp-content
+    networks:
+      - backend
+    restart: "no"
+
+  mysql:
+    image: mysql:8.0.40
+    container_name: mysql
+    env_file:
+      - .env
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - TZ=${TZ}
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - ./${APP_NAME}/data/mysql:/var/lib/mysql
+      - ./${APP_NAME}/logs/mysql:/var/log/mysql
+    command: --default-time-zone='+07:00'
+    networks:
+      - backend
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.2.1
+    container_name: phpmyadmin
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: 64M
+    ports:
+      - "${PHPMYADMIN_PORT:-8080}:80"
+    networks:
+      - backend
+    restart: unless-stopped
+
+  redis:
+    image: redis:7.2.4-alpine
+    container_name: redis
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf", "--requirepass", "${REDIS_PASSWORD}"]
+    env_file:
+      - .env
+    environment:
+      - TZ=${TZ}
+    volumes:
+      - ./infra/redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+      - ./${APP_NAME}/data/redis:/data
+      - ./${APP_NAME}/logs/redis:/var/log/redis
+    networks:
+      - backend
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a $$REDIS_PASSWORD ping | grep -q PONG || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  wp_app:

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginepagesblocks/trip-search",
+  "version": "1.0.0",
+  "title": "Trip Search Result",
+  "category": "widgets",
+  "description": "Trip Search Result Page.",
+  "attributes": {},
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

@@ -1,0 +1,188 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/trip-fsd-date-selector",
+  "version": "1.0.0",
+  "icon": "calendar-alt",
+  "title": "Trip FSD Date Select",
+  "description": "Prompt visitors to add date selector for fsd.",
+  "category": "widgets",
+  "parent": [
+    "wptravelenginetripblocks/trip-fixed-starting-date"
+  ],
+  "attributes": {
+    "textColor": {
+      "type": "object",
+      "default": {
+        "initial": "#999"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Text",
+            "style": "color"
+          }
+        }
+      },
+      "selectors": [
+        "#wte-fixed-departure-dates %WRAPPER% .select2-container--default .select2-selection--single .select2-selection__rendered",
+        "#wte-fixed-departure-dates %WRAPPER% .select2-selection__arrow"
+      ]
+    },
+    "background": {
+      "type": "object",
+      "default": {
+        "initial": "#fff"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Background",
+            "style": "background"
+          }
+        }
+      },
+      "selectors": [
+        "#wte-fixed-departure-dates %WRAPPER% .select2-container--default .select2-selection"
+      ]
+    },
+    "padding": {
+      "type": "object",
+      "default": {
+        "top": "10px",
+        "right": "16px",
+        "bottom": "10px",
+        "left": "16px"
+      },
+      "selectors": [
+        "#wte-fixed-departure-dates %WRAPPER% .select2-container--default .select2-selection"
+      ]
+    },
+    "margin": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      },
+      "selectors": [
+        "#wte-fixed-departure-dates %WRAPPER% .select2-container--default .select2-selection"
+      ]
+    },
+    "border": {
+      "type": "object",
+      "default": {
+        "width": "1",
+        "color": "",
+        "style": "none"
+      },
+      "selectors": [
+        "#wte-fixed-departure-dates %WRAPPER% .select2-container--default .select2-selection"
+      ]
+    },
+    "borderRadius": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      },
+      "selectors": [
+        "#wte-fixed-departure-dates %WRAPPER% .select2-container--default .select2-selection"
+      ]
+    },
+    "boxShadow": {
+      "type": "object",
+      "selectors": [
+        "#wte-fixed-departure-dates %WRAPPER% .select2-container--default .select2-selection"
+      ]
+    },
+    "alignment": {
+      "type": "string",
+      "label": "Alignment",
+      "default": "flex-end",
+      "control": {
+        "type": "alignment",
+        "style": "justify-content",
+        "controlAttribute": {
+          "flex": true
+        }
+      },
+      "selectors": [
+        "#wte-fixed-departure-dates %WRAPPER% .wte-fsd-list-header"
+      ],
+      "panel": "-select-"
+    },
+    "width": {
+      "type": "string",
+      "label": "Width",
+      "default": "190px",
+      "selectors": [
+        "%WRAPPER% .wte-user-input"
+      ],
+      "control": {
+        "type": "range",
+        "style": "width",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "max": "500",
+              "min": "100"
+            },
+            {
+              "unit": "%",
+              "max": "100",
+              "min": "1"
+            }
+          ]
+        }
+      },
+      "panel": "-select-"
+    },
+    "typography": {
+      "type": "object",
+      "default": {
+        "size": {
+          "desktop": "16px",
+          "tablet": "16px",
+          "mobile": "16px"
+        }
+      },
+      "selectors": [
+        "#wte-fixed-departure-dates %WRAPPER% .select2-container--default .select2-selection--single .select2-selection__rendered",
+        "%WRAPPER% .select2-selection__arrow"
+      ]
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "colors": {
+        "link": false
+      },
+      "border": true,
+      "spacing": {
+        "margin": true,
+        "padding": true
+      },
+      "panels": {
+        "-select-": {
+          "title": "Select"
+        }
+      }
+    }
+  },
+  "editorScript": [
+    "wte-select2"
+  ],
+  "viewScript": [
+    "wte-select2"
+  ],
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

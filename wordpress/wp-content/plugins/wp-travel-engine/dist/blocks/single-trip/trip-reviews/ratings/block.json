@@ -1,0 +1,52 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/trip-ratings",
+  "version": "1.0.0",
+  "title": "Trip Ratings",
+  "category": "widgets",
+  "icon": "star-half",
+  "description": "Display average customer ratings, whether a perfect five or a solid 4.",
+  "script": [],
+  "attributes": {
+    "alignment": {
+      "type": "string",
+      "label": "Alignment",
+      "panel": "-ratings-",
+      "control": {
+        "type": "alignment",
+        "style": "text-align"
+      },
+      "default": "center",
+      "selectors": "%WRAPPER% .trip-rating-container"
+    },
+    "typography": {
+      "type": "object",
+      "default": {
+        "size": {
+          "desktop": "32px",
+          "tablet": "32px",
+          "mobile": "32px"
+        }
+      }
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "colors": {
+        "background": true,
+        "text": true,
+        "link": false
+      },
+      "panels": {
+        "-ratings-": {
+          "title": "Ratings",
+          "icon": "star-filled"
+        }
+      }
+    }
+  },
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

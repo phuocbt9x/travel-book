@@ -1,0 +1,55 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/experience-date",
+  "version": "1.0.0",
+  "title": "Experience Date",
+  "category": "widgets",
+  "icon": "calendar",
+  "description": "Display trip's reviews experience date.",
+  "usesContext": [
+    "commentId"
+  ],
+  "ancestor": [
+    "core/comments"
+  ],
+  "attributes": {
+    "alignment": {
+      "type": "string",
+      "label": "Alignment",
+      "panel": "-experiencedate-",
+      "control": {
+        "type": "alignment",
+        "style": "text-align"
+      },
+      "default": "left",
+      "selectors": "%WRAPPER%"
+    },
+    "typography": {
+      "type": "object",
+      "default": {
+        "size": {
+          "desktop": "14px",
+          "tablet": "14px",
+          "mobile": "14px"
+        }
+      }
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "colors": {
+        "link": false
+      },
+      "panels": {
+        "-experiencedate-": {
+          "title": "Experience Date",
+          "icon": "star-filled"
+        }
+      }
+    }
+  },
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

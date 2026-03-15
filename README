@@ -1,0 +1,149 @@
+# Travel — WordPress Tour Booking
+
+Multi-language (VI / EN / ES) tour booking platform on WordPress, run with Docker.
+
+## Stack
+
+| Component     | Role |
+|-------------|------|
+| **Nginx**   | Reverse proxy; serves static assets and proxies PHP to php-fpm. Ports 80/443 (overridable via `.env`). |
+| **PHP-FPM** | PHP 8.3; config from `.env`; `php.ini` generated from template at container start. |
+| **WordPress** | Core in volume `wp_app`; `wp-content` and `wp-config.php` bind-mounted from host. |
+| **MySQL 8** | Database. Port 3306 exposed to host (overridable); used by app and phpMyAdmin. |
+| **Redis 7** | Object cache (Redis Object Cache plugin). Internal only; no port published. |
+| **phpMyAdmin** | Web UI for MySQL. Port 8080 by default (overridable via `PHPMYADMIN_PORT`). |
+
+## Requirements
+
+- Docker
+- Docker Compose
+
+## Project structure
+
+```
+.
+├── .env
+├── .env-example
+├── docker-compose.yml
+├── wordpress/
+│   ├── wp-config.php
+│   ├── wp-content/
+│   └── core/
+├── infra/
+│   ├── nginx/
+│   ├── php/
+│   ├── redis/
+│   └── healthcheck.php
+└── ${APP_NAME}/
+    ├── data/
+    └── logs/
+```
+
+## Building and running the project
+
+### 1. Clone and enter the repo
+
+```bash
+git clone <repository-url> travel
+cd travel
+```
+
+### 2. Create environment file
+
+Copy the example env and set your values:
+
+```bash
+cp .env-example .env
+```
+
+Edit `.env`. Required and commonly changed variables:
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `APP_NAME` | App name; used for `./${APP_NAME}/data` and `./${APP_NAME}/logs` | `wp_travel` |
+| `WP_HOME` | Site URL | `http://localhost` |
+| `WP_SITEURL` | Site URL (defaults to `WP_HOME`) | `http://localhost` |
+| `DB_NAME` | MySQL database name | `wordpress` |
+| `DB_USER` | MySQL user | `wp_user` |
+| `DB_PASSWORD` | MySQL password | (set a strong password) |
+| `DB_ROOT_PASSWORD` | MySQL root password | (set a strong password) |
+| `REDIS_PASSWORD` | Redis password | (set a strong password) |
+| `AUTH_KEY`, `SECURE_AUTH_KEY`, … | WordPress salts/keys | Generate new for production |
+
+Optional: `NGINX_HTTP_PORT`, `NGINX_HTTPS_PORT`, `MYSQL_PORT`, `PHPMYADMIN_PORT`, `PHP_*`, `TZ`, etc.
+
+### 3. Create data and log directories
+
+Compose uses `./${APP_NAME}/data` and `./${APP_NAME}/logs`. With default `APP_NAME=wp_travel`:
+
+```bash
+mkdir -p wp_travel/data wp_travel/logs
+```
+
+Or use another `APP_NAME` and create `./<APP_NAME>/data` and `./<APP_NAME>/logs`.
+
+### 4. Build images and start containers
+
+```bash
+docker compose up -d --build
+```
+
+This will:
+
+- Build the PHP-FPM image (from `infra/php/Dockerfile`) and the WordPress app image (from `wordpress/core/Dockerfile`).
+- Start MySQL and Redis, then wait for them to be healthy.
+- Run the one-off `wordpress-app` service to populate the `wp_app` volume with WordPress core.
+- Start php-fpm (waits for wordpress-app to complete and for MySQL/Redis health).
+- Start Nginx (waits for php-fpm health) and phpMyAdmin.
+
+### 5. Wait for services to be ready
+
+Check that all services are up and healthy:
+
+```bash
+docker compose ps
+```
+
+Ensure `nginx`, `php-fpm`, `mysql`, `redis`, and `phpmyadmin` are running. Initial MySQL data directory creation can take a minute.
+
+### 6. Open the site and finish WordPress setup
+
+1. In a browser, open the URL set in `WP_HOME` (e.g. `http://localhost`).
+2. Complete the WordPress installation (language, admin user, password).
+3. Log in to the admin. Plugins and themes installed from the admin will appear under `wordpress/wp-content/` on the host.
+
+### 7. Optional: phpMyAdmin
+
+Open `http://localhost:8080` (or the host/port given by `PHPMYADMIN_PORT`). Log in with `DB_USER`/`DB_PASSWORD` or `root`/`DB_ROOT_PASSWORD` from `.env`.
+
+## Common commands
+
+```bash
+docker compose up -d --build
+docker compose down
+docker compose down -v
+docker compose logs -f [service]
+docker compose ps
+docker compose restart [service]
+```
+
+- `down`: stops and removes containers; keeps volumes (data preserved).
+- `down -v`: also removes volumes; MySQL and Redis data will be lost.
+- Replace `[service]` with e.g. `nginx`, `php-fpm`, `mysql`, `redis`, `phpmyadmin`.
+
+## Configuration
+
+- **WordPress:** `wordpress/wp-config.php` reads from environment variables (`.env`). Change `.env` and restart the app layer (e.g. `docker compose restart php-fpm`) as needed.
+- **PHP:** `php.ini` is generated at php-fpm start from `infra/php/php.ini.template` using `.env` (e.g. `PHP_MEMORY_LIMIT`, `TZ`). Edit `.env` and rebuild/restart php-fpm to apply.
+- **Nginx:** Edit `infra/nginx/nginx.conf`, then `docker compose restart nginx`.
+- **Redis:** Edit `infra/redis/redis.conf`, then `docker compose restart redis`. Redis is not exposed to the host; only containers on the `backend` network can connect.
+
+## Data and logs
+
+- **Data:** `./${APP_NAME}/data/mysql`, `./${APP_NAME}/data/redis`
+- **Logs:** `./${APP_NAME}/logs/nginx`, `./${APP_NAME}/logs/php`, `./${APP_NAME}/logs/mysql`, `./${APP_NAME}/logs/redis`. WordPress debug log path is set by `WP_DEBUG_LOG` in `.env` (typically under the php log directory).
+
+## Security
+
+- Nginx publishes 80/443; phpMyAdmin publishes 8080 (or `PHPMYADMIN_PORT`); MySQL publishes 3306 (or `MYSQL_PORT`). Redis and php-fpm have no published ports and are only reachable on the Docker network.
+- For production: set strong secrets in `.env`, use HTTPS, restrict or remove port publishing where possible, configure firewall, and back up data and logs.

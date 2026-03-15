@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/trip-description",
+  "version": "1.0.0",
+  "title": "Trip Description",
+  "icon": "archive",
+  "category": "widgets",
+  "keywords": [
+    "overview",
+    "description"
+  ],
+  "description": "Enjoy complete control over your trip description.",
+  "script": [],
+  "textdomain": "wptravelengine",
+  "attributes": {
+    "alignment": {
+      "type": "string",
+      "label": "Alignment",
+      "panel": "-description-",
+      "default": "left",
+      "control": {
+        "type": "alignment",
+        "style": "text-align"
+      }
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "panels": {
+        "-description-": {
+          "title": "Description",
+          "icon": "calendar"
+        }
+      }
+    }
+  },
+  "render": "file:./block.php"
+}

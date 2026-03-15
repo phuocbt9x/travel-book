@@ -1,0 +1,55 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/review-title",
+  "version": "1.0.0",
+  "title": "Review Title",
+  "category": "widgets",
+  "icon": "editor-textcolor",
+  "description": "Reviews",
+  "usesContext": [
+    "commentId"
+  ],
+  "ancestor": [
+    "core/comments"
+  ],
+  "attributes": {
+    "alignment": {
+      "type": "string",
+      "label": "Alignment",
+      "panel": "-reviewtitle-",
+      "control": {
+        "type": "alignment",
+        "style": "text-align"
+      },
+      "default": "left",
+      "selectors": "%WRAPPER%"
+    },
+    "typography": {
+      "type": "object",
+      "default": {
+        "size": {
+          "desktop": "18px",
+          "tablet": "18px",
+          "mobile": "18px"
+        }
+      }
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "colors": {
+        "link": false
+      },
+      "panels": {
+        "-reviewtitle-": {
+          "title": "Review Title",
+          "icon": "admin-comments"
+        }
+      }
+    }
+  },
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

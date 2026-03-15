@@ -1,0 +1,242 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/trip-fixed-starting-date",
+  "version": "1.0.0",
+  "icon": "calendar-alt",
+  "title": "Trip Fixed Starting Date",
+  "description": "Improve trip booking and user navigation with the organised and automated features of the Fixed Starting Dates block.",
+  "category": "widgets",
+  "script": [],
+  "attributes": {
+    "textColor": {
+      "type": "string",
+      "default": "rgba(6, 22, 38, 0.7)",
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr td,%WRAPPER% #nestable1 .dd-list table tr th"
+    },
+    "buttonPadding": {
+      "type": "object",
+      "label": "Padding",
+      "default": {
+        "top": "6px",
+        "right": "12px",
+        "bottom": "6px",
+        "left": "12px"
+      },
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr .book-btn",
+      "control": {
+        "type": "spacing",
+        "style": "padding",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "panel": "-button-"
+    },
+    "buttonMargin": {
+      "type": "object",
+      "label": "Margin",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      },
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr .book-btn",
+      "control": {
+        "type": "spacing",
+        "style": "margin",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "panel": "-button-"
+    },
+    "buttonBorder": {
+      "type": "object",
+      "label": "Border",
+      "default": {
+        "width": "",
+        "style": "",
+        "color": ""
+      },
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr .book-btn",
+      "control": {
+        "type": "border"
+      },
+      "panel": "-button-"
+    },
+    "buttonRadius": {
+      "type": "object",
+      "label": "Border Radius",
+      "default": {
+        "top": "4px",
+        "right": "4px",
+        "bottom": "4px",
+        "left": "4px"
+      },
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr .book-btn",
+      "control": {
+        "type": "spacing",
+        "style": "borderRadius",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "panel": "-button-"
+    },
+    "buttonColor": {
+      "type": "object",
+      "label": "Text",
+      "default": {
+        "initial": "#ffffff",
+        "hover": "#147dfe"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Text",
+            "style": "color"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "color:hover"
+          }
+        }
+      },
+      "panel": "-button-",
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr .book-btn"
+    },
+    "buttonbgColor": {
+      "type": "object",
+      "label": "Background",
+      "default": {
+        "initial": "#147dfe",
+        "hover": "#ffffff"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Background",
+            "style": "background"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "background:hover"
+          }
+        }
+      },
+      "panel": "-button-",
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr .book-btn"
+    },
+    "dateIcon": {
+      "type": "object",
+      "label": "Icon",
+      "default": {
+        "initial": "#147DFE",
+        "hover": "#147DFE"
+      },
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr .svg-inline--fa",
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Initial",
+            "style": "color"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "color:hover"
+          }
+        }
+      },
+      "panel": "-color-"
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "colors": {
+        "link": false
+      },
+      "border": true,
+      "spacing": {
+        "margin": true,
+        "padding": true
+      },
+      "panels": {
+        "-date-": {
+          "title": "Date"
+        },
+        "-availability-": {
+          "title": "Availability"
+        },
+        "-price-": {
+          "title": "Price"
+        },
+        "-space-": {
+          "title": "Space"
+        },
+        "-color-": {
+          "title": "Color"
+        },
+        "-label-": {
+          "title": "Label"
+        },
+        "-column-": {
+          "title": "Column"
+        },
+        "-display-": {
+          "title": "Display"
+        },
+        "-loader-": {
+          "title": "Load More Button"
+        },
+        "-button-": {
+          "title": "Button"
+        }
+      }
+    }
+  },
+  "viewScript": [
+    "wte-redux",
+    "jquery-fancy-box"
+  ],
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

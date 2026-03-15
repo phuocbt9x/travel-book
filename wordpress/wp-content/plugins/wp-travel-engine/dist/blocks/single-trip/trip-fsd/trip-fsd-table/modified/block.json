@@ -1,0 +1,1042 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/trip-fsd-table",
+  "version": "1.0.1",
+  "title": "Trip Fixed Starting Date Table",
+  "description": "Display trip's fixed starting date.",
+  "category": "widgets",
+  "icon": "table-row-after",
+  "attributes": {
+    "textColor": {
+      "type": "object",
+      "default": {
+        "initial": "rgba(6, 22, 38, 0.7)"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Text",
+            "style": "color"
+          }
+        }
+      },
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr td,%WRAPPER% #nestable1 .dd-list table tr th"
+    },
+    "background": {
+      "type": "object",
+      "label": "Background",
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Background",
+            "style": "background"
+          }
+        }
+      },
+      "selectors": "%WRAPPER% #nestable1"
+    },
+    "padding": {
+      "type": "object",
+      "label": "Padding",
+      "selectors": "%WRAPPER% #nestable1",
+      "control": {
+        "type": "spacing",
+        "style": "padding",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      }
+    },
+    "margin": {
+      "type": "object",
+      "label": "Margin",
+      "selectors": "%WRAPPER% #nestable1",
+      "control": {
+        "type": "spacing",
+        "style": "margin",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      }
+    },
+    "border": {
+      "type": "object",
+      "label": "Border",
+      "default": {
+        "width": "1",
+        "style": "none",
+        "color": ""
+      },
+      "selectors": "%WRAPPER% #nestable1",
+      "control": {
+        "type": "border"
+      }
+    },
+    "boxShadow": {
+      "type": "object",
+      "default": {},
+      "selectors": "%WRAPPER% #nestable1"
+    },
+    "borderRadius": {
+      "type": "object",
+      "label": "Border Radius",
+      "selectors": "%WRAPPER% #nestable1",
+      "control": {
+        "type": "spacing",
+        "style": "borderRadius",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      }
+    },
+    "text": {
+      "type": "string"
+    },
+    "dateLabel": {
+      "type": "string",
+      "default": "TRIP DATES"
+    },
+    "availabilityLabel": {
+      "type": "string",
+      "default": "AVAILABILITY"
+    },
+    "priceLabel": {
+      "type": "string",
+      "default": "PRICE"
+    },
+    "spaceLabel": {
+      "type": "string",
+      "default": "SPACE LEFT"
+    },
+    "bookingLabel": {
+      "type": "string",
+      "default": "Book Now"
+    },
+    "soldoutLabel": {
+      "type": "string",
+      "default": "Sold Out"
+    },
+    "showMoreLabel": {
+      "type": "string",
+      "default": "Show More Dates"
+    },
+    "showLessLabel": {
+      "type": "string",
+      "default": "Show Less Dates"
+    },
+    "timeSlotsLabel": {
+      "type": "string",
+      "default": "Time Slots Available"
+    },
+    "groupDiscountLabel": {
+      "type": "string",
+      "default": "Group Discount Available"
+    },
+    "dateColumn": {
+      "type": "boolean",
+      "label": "Date Filter",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-dateFilter-"
+    },
+    "dateFilterActiveColor": {
+      "type": "object",
+      "label": "Active Text",
+      "default": {
+        "initial": "#ffffff"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Text",
+            "style": "color"
+          }
+        }
+      },
+      "panel": "-dateFilter-",
+      "selectors": "%WRAPPER% .wte-fsd__button.is-active"
+    },
+    "dateFilterActiveBgColor": {
+      "type": "object",
+      "label": "Active Background",
+      "default": {
+        "initial": "#1a84ee"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Background",
+            "style": "background"
+          }
+        }
+      },
+      "panel": "-dateFilter-",
+      "selectors": "%WRAPPER% .wte-fsd__button.is-active"
+    },
+    "dateFilterInactiveColor": {
+      "type": "object",
+      "label": "Inactive Text",
+      "default": {
+        "initial": "#3F494B"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Text",
+            "style": "color"
+          }
+        }
+      },
+      "panel": "-dateFilter-",
+      "selectors": "%WRAPPER% .wte-fsd__button"
+    },
+    "dateFilterInactiveBgColor": {
+      "type": "object",
+      "label": "Inactive Background",
+      "default": {
+        "initial": "#ffffff"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Background",
+            "style": "background"
+          }
+        }
+      },
+      "panel": "-dateFilter-",
+      "selectors": "%WRAPPER% .wte-fsd__button"
+    },
+    "timeSlotsColumn": {
+      "type": "boolean",
+      "label": "Time Slots",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-timeslot-"
+    },
+    "timeSlotsColor": {
+      "type": "object",
+      "label": "Text",
+      "default": {
+        "initial": "rgb(1, 139, 255)"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Text",
+            "style": "color"
+          }
+        }
+      },
+      "panel": "-timeslot-",
+      "selectors": "%WRAPPER% .wte-fsd__tag.wte-fsd__time-slots"
+    },
+    "timeSlotsBgColor": {
+      "type": "object",
+      "label": "Background",
+      "default": {
+        "initial": "rgba(42, 133, 255, 0.1019607843)"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Background",
+            "style": "background"
+          }
+        }
+      },
+      "panel": "-timeslot-",
+      "selectors": "%WRAPPER% .wte-fsd__tag.wte-fsd__time-slots"
+    },
+    "groupDiscountColumn": {
+      "type": "boolean",
+      "label": "Group Discount Tag",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-groupdiscount-"
+    },
+    "groupDiscountColor": {
+      "type": "object",
+      "label": "Text",
+      "default": {
+        "initial": "#12B76A"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Text",
+            "style": "color"
+          }
+        }
+      },
+      "panel": "-groupdiscount-",
+      "selectors": "%WRAPPER% .wte-fsd__tag.wte-fsd__group-discount"
+    },
+    "groupDiscountBgColor": {
+      "type": "object",
+      "label": "Background",
+      "default": {
+        "initial": "rgba(18, 183, 106, 0.0784313725)"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Background",
+            "style": "background"
+          }
+        }
+      },
+      "panel": "-groupdiscount-",
+      "selectors": "%WRAPPER% .wte-fsd__tag.wte-fsd__group-discount"
+    },
+    "availabilityTag": {
+      "type": "boolean",
+      "label": "Availability Tag",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-availability-"
+    },
+    "availabilityColor": {
+      "type": "object",
+      "label": "Availability Text",
+      "default": {
+        "initial": "#d86c35"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Text",
+            "style": "color"
+          }
+        }
+      },
+      "panel": "-availability-",
+      "selectors": "%WRAPPER% .wte-fsd__tag.wte-fsd__availability-label"
+    },
+    "availabilityBgColor": {
+      "type": "object",
+      "label": "Background",
+      "default": {
+        "initial": "rgba(216, 108, 53, 0.0784313725)"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Background",
+            "style": "background"
+          }
+        }
+      },
+      "panel": "-availability-",
+      "selectors": "%WRAPPER% .wte-fsd__tag.wte-fsd__availability-label"
+    },
+    "startDate": {
+      "type": "boolean",
+      "label": "Start Date",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-date-"
+    },
+    "endDate": {
+      "type": "boolean",
+      "label": "End Date",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-date-"
+    },
+    "dateFormat": {
+      "type": "string",
+      "label": "Format",
+      "default": "M j, Y",
+      "control": {
+        "type": "select",
+        "controlAttribute": {
+          "description": "Changes will reflect only on the frontend.",
+          "options": [
+            {
+              "value": "Y-m-d",
+              "label": "YYYY-MM-DD"
+            },
+            {
+              "value": "m/d/Y",
+              "label": "MM/DD/YYYY"
+            },
+            {
+              "value": "M j, Y",
+              "label": "M j, Y"
+            },
+            {
+              "value": "custom",
+              "label": "Custom"
+            }
+          ]
+        }
+      },
+      "panel": "-date-"
+    },
+    "customDateFormat": {
+      "type": "string",
+      "label": "Custom Date Format",
+      "default": "M j, Y",
+      "control": {
+        "type": "text"
+      },
+      "panel": "-date-"
+    },
+    "priceColumn": {
+      "type": "boolean",
+      "label": "Price Column",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-price-"
+    },
+    "salePrice": {
+      "type": "boolean",
+      "label": "Sale Price",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-price-"
+    },
+    "regularPrice": {
+      "type": "boolean",
+      "label": "Regular Price",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-price-"
+    },
+    "showDiscount": {
+      "type": "boolean",
+      "label": "Discount",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-price-"
+    },
+    "discountColor": {
+      "type": "object",
+      "label": "Discount Color",
+      "default": {
+        "initial": "#ffffff"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Text",
+            "style": "color"
+          }
+        }
+      },
+      "panel": "-price-",
+      "selectors": "%WRAPPER% .wte-fsd__availability-discount"
+    },
+    "discountBgColor": {
+      "type": "object",
+      "label": "Discount Background",
+      "default": {
+        "initial": "#D86C35"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Background",
+            "style": "background"
+          }
+        }
+      },
+      "panel": "-price-",
+      "selectors": "%WRAPPER% .wte-fsd__availability-discount"
+    },
+    "spaceColumn": {
+      "type": "boolean",
+      "label": "Space Column",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-spacecolumn-"
+    },
+    "spaceAvailableColor": {
+      "type": "object",
+      "label": "Availability Text",
+      "default": {
+        "initial": "#000000"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Availability Text",
+            "style": "color"
+          }
+        }
+      },
+      "panel": "-spacecolumn-",
+      "selectors": "%WRAPPER% .wte-fsd__availability-remaining-seats "
+    },
+    "spaceUnavailableColor": {
+      "type": "object",
+      "label": "Unavailability Text",
+      "default": {
+        "initial": "#F04438"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Unavailability Text",
+            "style": "color"
+          }
+        }
+      },
+      "panel": "-spacecolumn-",
+      "selectors": "%WRAPPER% .wte-fsd__availability-remaining-seats.wte-fsd__sold-out"
+    },
+    "buttonTypography": {
+      "type": "object",
+      "default": {
+        "size": {
+          "desktop": "15px",
+          "tablet": "15px",
+          "mobile": "15px"
+        }
+      },
+      "label": "Typography",
+      "selectors": "%WRAPPER% .wte-fsd__booknow-btn,%WRAPPER% .wte-fsd__availability-cta-wrap .wte-fsd__sold-out",
+      "control": {
+        "type": "typography"
+      },
+      "panel": "-button-"
+    },
+    "buttonPadding": {
+      "type": "object",
+      "label": "Padding",
+      "default": {
+        "top": "15px",
+        "right": "32px",
+        "bottom": "15px",
+        "left": "32px"
+      },
+      "selectors": "%WRAPPER% .wte-fsd__booknow-btn,%WRAPPER% .wte-fsd__availability-cta-wrap .wte-fsd__sold-out",
+      "control": {
+        "type": "spacing",
+        "style": "padding",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "panel": "-button-"
+    },
+    "buttonMargin": {
+      "type": "object",
+      "label": "Margin",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      },
+      "selectors": "%WRAPPER% .wte-fsd__booknow-btn,%WRAPPER% .wte-fsd__availability-cta-wrap .wte-fsd__sold-out",
+      "control": {
+        "type": "spacing",
+        "style": "margin",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "panel": "-button-"
+    },
+    "buttonBoxShadow": {
+      "type": "object",
+      "default": {},
+      "selectors": "%WRAPPER% .wte-fsd__booknow-btn,%WRAPPER% .wte-fsd__availability-cta-wrap .wte-fsd__sold-out"
+    },
+    "buttonRadius": {
+      "type": "object",
+      "label": "Border Radius",
+      "default": {
+        "top": "100px",
+        "right": "100px",
+        "bottom": "100px",
+        "left": "100px"
+      },
+      "selectors": "%WRAPPER% .wte-fsd__booknow-btn,%WRAPPER% .wte-fsd__availability-cta-wrap .wte-fsd__sold-out",
+      "control": {
+        "type": "spacing",
+        "style": "borderRadius",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "panel": "-button-"
+    },
+    "buttonColor": {
+      "type": "object",
+      "label": "Book Now Text",
+      "default": {
+        "initial": "#147dfe",
+        "hover": "#ffffff"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Book Now Text",
+            "style": "color"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "color:hover"
+          }
+        }
+      },
+      "panel": "-button-",
+      "selectors": "%WRAPPER% .wte-fsd__booknow-btn"
+    },
+    "buttonbgColor": {
+      "type": "object",
+      "label": "Book Now Background",
+      "default": {
+        "initial": "#ffffff",
+        "hover": "#147dfe"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Book Now Background",
+            "style": "background"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "background:hover"
+          }
+        }
+      },
+      "panel": "-button-",
+      "selectors": "%WRAPPER% .wte-fsd__booknow-btn"
+    },
+    "buttonBorder": {
+      "type": "object",
+      "label": "Book Now Border",
+      "default": {
+        "width": 2,
+        "color": "#147dfe",
+        "style": "solid"
+      },
+      "selectors": "%WRAPPER% .wte-fsd__booknow-btn",
+      "control": {
+        "type": "border"
+      },
+      "panel": "-button-"
+    },
+    "soldoutColor": {
+      "type": "object",
+      "label": "Sold Out Text",
+      "default": {
+        "initial": "#F04438",
+        "hover": "#ffffff"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Sold Out Text",
+            "style": "color"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "color:hover"
+          }
+        }
+      },
+      "panel": "-button-",
+      "selectors": "%WRAPPER% .wte-fsd__availability-cta-wrap .wte-fsd__sold-out"
+    },
+    "soldoutbgColor": {
+      "type": "object",
+      "label": "Sold Out Background",
+      "default": {
+        "initial": "#ffffff",
+        "hover": "#F04438"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Sold Out Background",
+            "style": "background"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "background:hover"
+          }
+        }
+      },
+      "panel": "-button-",
+      "selectors": "%WRAPPER% .wte-fsd__availability-cta-wrap .wte-fsd__sold-out"
+    },
+    "soldoutBorder": {
+      "type": "object",
+      "label": "Sold Out Border",
+      "default": {
+        "width": 2,
+        "color": "#F04438",
+        "style": "solid"
+      },
+      "selectors": "%WRAPPER% .wte-fsd__availability-cta-wrap .wte-fsd__sold-out",
+      "control": {
+        "type": "border"
+      },
+      "panel": "-button-"
+    },
+    "loaderPadding": {
+      "type": "object",
+      "label": "Padding",
+      "default": {
+        "top": "18px",
+        "right": "32px",
+        "bottom": "18px",
+        "left": "32px"
+      },
+      "selectors": "%WRAPPER% .wte-fsd__availability-show-less,%WRAPPER% .wte-fsd__availability-show-more",
+      "control": {
+        "type": "spacing",
+        "style": "padding",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "panel": "-loader-"
+    },
+    "loaderMargin": {
+      "type": "object",
+      "label": "Margin",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      },
+      "selectors": "%WRAPPER% .wte-fsd__availability-show-less,%WRAPPER% .wte-fsd__availability-show-more",
+      "control": {
+        "type": "spacing",
+        "style": "margin",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "panel": "-loader-"
+    },
+    "loaderBorder": {
+      "type": "object",
+      "label": "Border",
+      "default": {
+        "width": 2,
+        "color": "#147dfe",
+        "style": "solid"
+      },
+      "selectors": "%WRAPPER% .wte-fsd__availability-show-less,%WRAPPER% .wte-fsd__availability-show-more",
+      "control": {
+        "type": "border"
+      },
+      "panel": "-loader-"
+    },
+    "loaderBoxShadow": {
+      "type": "object",
+      "default": {},
+      "selectors": "%WRAPPER% .wte-fsd__availability-show-less,%WRAPPER% .wte-fsd__availability-show-more"
+    },
+    "loaderRadius": {
+      "type": "object",
+      "label": "Border Radius",
+      "default": {
+        "top": "100px",
+        "right": "100px",
+        "bottom": "100px",
+        "left": "100px"
+      },
+      "selectors": "%WRAPPER% .wte-fsd__availability-show-less,%WRAPPER% .wte-fsd__availability-show-more",
+      "control": {
+        "type": "spacing",
+        "style": "borderRadius",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "panel": "-loader-"
+    },
+    "loaderColor": {
+      "type": "object",
+      "label": "Text",
+      "default": {
+        "initial": "#147dfe",
+        "hover": "#ffffff"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Text",
+            "style": "color"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "color:hover"
+          }
+        }
+      },
+      "panel": "-loader-",
+      "selectors": "%WRAPPER% .wte-fsd__availability-show-less,%WRAPPER% .wte-fsd__availability-show-more"
+    },
+    "loaderbgColor": {
+      "type": "object",
+      "label": "Background",
+      "default": {
+        "initial": "transparent",
+        "hover": "#147dfe"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Background",
+            "style": "background"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "background:hover"
+          }
+        }
+      },
+      "panel": "-loader-",
+      "selectors": "%WRAPPER% .wte-fsd__availability-show-less,%WRAPPER% .wte-fsd__availability-show-more"
+    },
+    "dateIcon": {
+      "type": "object",
+      "label": "Icon",
+      "default": {
+        "initial": "#147DFE"
+      },
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr .svg-inline--fa",
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Initial",
+            "style": "color"
+          }
+        }
+      }
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "colors": {
+        "link": false
+      },
+      "border": true,
+      "spacing": {
+        "margin": true,
+        "padding": true
+      },
+      "panels": {
+        "-dateFilter-": {
+          "title": "Date Filter"
+        },
+        "-date-": {
+          "title": "Date Column"
+        },
+        "-select-": {
+          "title": "Select"
+        },
+        "-space-": {
+          "title": "Space"
+        },
+        "-label-": {
+          "title": "Label"
+        },
+        "-timeslot-": {
+          "title": "Time Slots"
+        },
+        "-groupdiscount-": {
+          "title": "Group Discount"
+        },
+        "-availability-": {
+          "title": "Availability"
+        },
+        "-price-": {
+          "title": "Price Column"
+        },
+        "-spacecolumn-": {
+          "title": "Space Column"
+        },
+        "-display-": {
+          "title": "Display"
+        },
+        "-loader-": {
+          "title": "Show More/Less Button"
+        },
+        "-button-": {
+          "title": "Book Now/Sold Out Button"
+        }
+      }
+    }
+  },
+  "editorScript": [
+    "wte-global"
+  ],
+  "viewScript": [
+    "wte-redux",
+    "jquery-fancy-box",
+    "wte-fixed-departure-dates",
+    "trip-booking-modal",
+    "wte-fpickr-lib",
+    "wp-api-request"
+  ],
+  "viewStyle": [
+    "wte-fixed-departure-dates",
+    "style-trip-booking-modal",
+    "wte-fpickr"
+  ],
+  "editorStyle": [
+    "wte-fsd-public",
+    "wte-fixed-departure-dates",
+    "wte-fsd-admin"
+  ],
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

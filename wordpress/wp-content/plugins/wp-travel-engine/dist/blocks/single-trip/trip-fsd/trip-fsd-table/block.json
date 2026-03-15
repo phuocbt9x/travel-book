@@ -1,0 +1,493 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/trip-fsd-table",
+  "version": "1.0.0",
+  "title": "Trip Fixed Starting Date Table",
+  "description": "Display trip's fixed starting date.",
+  "category": "widgets",
+  "icon": "table-row-after",
+  "attributes": {
+    "textColor": {
+      "type": "object",
+      "default": {
+        "initial": "rgba(6, 22, 38, 0.7)"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Text",
+            "style": "color"
+          }
+        }
+      },
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr td,%WRAPPER% #nestable1 .dd-list table tr th"
+    },
+    "background": {
+      "type": "object",
+      "label": "Background",
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Background",
+            "style": "background"
+          }
+        }
+      },
+      "selectors": "%WRAPPER% #nestable1"
+    },
+    "padding": {
+      "type": "object",
+      "label": "Padding",
+      "selectors": "%WRAPPER% #nestable1",
+      "control": {
+        "type": "spacing",
+        "style": "padding",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      }
+    },
+    "margin": {
+      "type": "object",
+      "label": "Margin",
+      "selectors": "%WRAPPER% #nestable1",
+      "control": {
+        "type": "spacing",
+        "style": "margin",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      }
+    },
+    "border": {
+      "type": "object",
+      "label": "Border",
+      "default": {
+        "width": "1",
+        "style": "none",
+        "color": ""
+      },
+      "selectors": "%WRAPPER% #nestable1",
+      "control": {
+        "type": "border"
+      }
+    },
+    "boxShadow": {
+      "type": "object",
+      "default": {},
+      "selectors": "%WRAPPER% #nestable1"
+    },
+    "borderRadius": {
+      "type": "object",
+      "label": "Border Radius",
+      "selectors": "%WRAPPER% #nestable1",
+      "control": {
+        "type": "spacing",
+        "style": "borderRadius",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      }
+    },
+    "text": {
+      "type": "string"
+    },
+    "dateLabel": {
+      "type": "string",
+      "default": "TRIP DATES"
+    },
+    "availabilityLabel": {
+      "type": "string",
+      "default": "AVAILABILITY"
+    },
+    "priceLabel": {
+      "type": "string",
+      "default": "PRICE"
+    },
+    "spaceLabel": {
+      "type": "string",
+      "default": "SPACE LEFT"
+    },
+    "bookingLabel": {
+      "type": "string",
+      "default": "Book Now"
+    },
+    "startDate": {
+      "type": "boolean",
+      "label": "Start Date",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-date-"
+    },
+    "endDate": {
+      "type": "boolean",
+      "label": "End Date",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-date-"
+    },
+    "noofRow": {
+      "type": "number",
+      "label": "Number of Rows",
+      "default": 2,
+      "control": {
+        "type": "input-number",
+        "controlAttribute": {
+          "min": 1,
+          "max": 10
+        }
+      },
+      "panel": "-date-"
+    },
+    "dateFormat": {
+      "type": "string",
+      "label": "Format",
+      "default": "F d, Y",
+      "control": {
+        "type": "select",
+        "controlAttribute": {
+          "options": [
+            {
+              "value": "Y-m-d",
+              "label": "YYYY-MM-DD"
+            },
+            {
+              "value": "m/d/Y",
+              "label": "MM/DD/YYYY"
+            },
+            {
+              "value": "F d, Y",
+              "label": "Month DD, YYYY"
+            },
+            {
+              "value": "custom",
+              "label": "Custom"
+            }
+          ]
+        }
+      },
+      "panel": "-date-"
+    },
+    "customDateFormat": {
+      "type": "string",
+      "label": "Custom Date Format",
+      "default": "F j, Y",
+      "control": {
+        "type": "text"
+      },
+      "panel": "-date-"
+    },
+    "dateColumn": {
+      "type": "boolean",
+      "label": "Date",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-column-"
+    },
+    "availabilityColumn": {
+      "type": "boolean",
+      "label": "Availability",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-column-"
+    },
+    "priceColumn": {
+      "type": "boolean",
+      "label": "Price",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-column-"
+    },
+    "spaceColumn": {
+      "type": "boolean",
+      "label": "Space",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-column-"
+    },
+    "buttonTypography": {
+      "type": "object",
+      "default": {},
+      "label": "Typography",
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr .book-btn",
+      "control": {
+        "type": "typography"
+      },
+      "panel": "-button-"
+    },
+    "buttonPadding": {
+      "type": "object",
+      "label": "Padding",
+      "default": {
+        "top": "6px",
+        "right": "12px",
+        "bottom": "6px",
+        "left": "12px"
+      },
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr .book-btn",
+      "control": {
+        "type": "spacing",
+        "style": "padding",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "panel": "-button-"
+    },
+    "buttonMargin": {
+      "type": "object",
+      "label": "Margin",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      },
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr .book-btn",
+      "control": {
+        "type": "spacing",
+        "style": "margin",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "panel": "-button-"
+    },
+    "buttonBorder": {
+      "type": "object",
+      "label": "Border",
+      "default": {
+        "width": "1",
+        "color": "#147dfe",
+        "style": "none"
+      },
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr .book-btn",
+      "control": {
+        "type": "border"
+      },
+      "panel": "-button-"
+    },
+    "buttonBoxShadow": {
+      "type": "object",
+      "default": {},
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr .book-btn"
+    },
+    "buttonRadius": {
+      "type": "object",
+      "label": "Border Radius",
+      "default": {
+        "top": "4px",
+        "right": "4px",
+        "bottom": "4px",
+        "left": "4px"
+      },
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr .book-btn",
+      "control": {
+        "type": "spacing",
+        "style": "borderRadius",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "panel": "-button-"
+    },
+    "buttonColor": {
+      "type": "object",
+      "label": "Text",
+      "default": {
+        "initial": "#ffffff",
+        "hover": "#147dfe"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Text",
+            "style": "color"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "color:hover"
+          }
+        }
+      },
+      "panel": "-button-",
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr .book-btn"
+    },
+    "buttonbgColor": {
+      "type": "object",
+      "label": "Background",
+      "default": {
+        "initial": "#147dfe",
+        "hover": "#ffffff"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Background",
+            "style": "background"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "background:hover"
+          }
+        }
+      },
+      "panel": "-button-",
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr .book-btn"
+    },
+    "dateIcon": {
+      "type": "object",
+      "label": "Icon",
+      "default": {
+        "initial": "#147DFE"
+      },
+      "selectors": "%WRAPPER% #nestable1 .dd-list table tr .svg-inline--fa",
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Initial",
+            "style": "color"
+          }
+        }
+      }
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "colors": {
+        "link": false
+      },
+      "border": true,
+      "spacing": {
+        "margin": true,
+        "padding": true
+      },
+      "panels": {
+        "-date-": {
+          "title": "Date"
+        },
+        "-select-": {
+          "title": "Select"
+        },
+        "-availability-": {
+          "title": "Availability"
+        },
+        "-price-": {
+          "title": "Price"
+        },
+        "-space-": {
+          "title": "Space"
+        },
+        "-label-": {
+          "title": "Label"
+        },
+        "-column-": {
+          "title": "Column"
+        },
+        "-display-": {
+          "title": "Display"
+        },
+        "-loader-": {
+          "title": "Load More Button"
+        },
+        "-button-": {
+          "title": "Button"
+        }
+      }
+    }
+  },
+  "editorScript": [
+    "wte-global"
+  ],
+  "viewScript": [
+    "wte-redux",
+    "jquery-fancy-box"
+  ],
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

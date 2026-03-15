@@ -1,0 +1,200 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/cost-includes",
+  "version": "1.0.0",
+  "title": "Cost Includes",
+  "icon": "plus-alt",
+  "description": "Outline trip inclusions with eye-catching icons.",
+  "category": "widgets",
+  "script": [],
+  "attributes": {
+    "listSpacing": {
+      "type": "string",
+      "label": "Items Spacing",
+      "panel": "-list-items-",
+      "default": "8px",
+      "selectors": "%WRAPPER% ul",
+      "control": {
+        "type": "range",
+        "style": "--items-spacing",
+        "controlAttribute": {
+          "min": 0,
+          "max": 50
+        }
+      }
+    },
+    "alignment": {
+      "type": "string",
+      "label": "Alignment",
+      "panel": "-list-items-",
+      "control": {
+        "type": "alignment",
+        "style": "text-align"
+      },
+      "default": "left",
+      "selectors": "%WRAPPER% .cost-includes-excludes-list"
+    },
+    "divider": {
+      "type": "boolean",
+      "default": false,
+      "label": "Divider",
+      "panel": "-list-items-",
+      "control": {
+        "type": "switch"
+      }
+    },
+    "dividerColor": {
+      "type": "string",
+      "default": "#cccccc",
+      "label": "Divider Color",
+      "panel": "-list-items-",
+      "selectors": "%WRAPPER% ul",
+      "control": {
+        "type": "color",
+        "style": "--items-divider-color"
+      }
+    },
+    "iconColor": {
+      "type": "string",
+      "label": "Primary Color",
+      "default": "#12b76a",
+      "selectors": "%WRAPPER% .cost-includes-excludes-list li .wte-block-icon",
+      "control": {
+        "type": "color",
+        "style": "color"
+      },
+      "panel": "-icon-"
+    },
+    "iconBgColor": {
+      "type": "string",
+      "label": "Secondary Color",
+      "default": "#cccccc",
+      "selectors": "%WRAPPER% .cost-includes-excludes-list li .wte-block-icon",
+      "control": {
+        "type": "color",
+        "style": "--secondary-color"
+      },
+      "panel": "-icon-"
+    },
+    "iconSize": {
+      "type": "string",
+      "label": "Icon Size",
+      "panel": "-icon-",
+      "default": "1.5em",
+      "selectors": "%WRAPPER% .cost-includes-excludes-list li",
+      "control": {
+        "type": "range",
+        "style": "--list-icon-size",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 1,
+              "max": 50
+            },
+            {
+              "unit": "em",
+              "min": 1,
+              "max": 8
+            }
+          ]
+        }
+      }
+    },
+    "iconView": {
+      "type": "string",
+      "default": "default",
+      "label": "View",
+      "panel": "-icon-",
+      "control": {
+        "type": "select",
+        "controlAttribute": {
+          "direction": "horizontal",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default"
+            },
+            {
+              "value": "stacked",
+              "label": "Stacked"
+            },
+            {
+              "value": "framed",
+              "label": "Framed"
+            }
+          ]
+        }
+      }
+    },
+    "iconRoundness": {
+      "type": "string",
+      "default": "50%",
+      "label": "Roundness",
+      "panel": "-icon-",
+      "selectors": "%WRAPPER% li .wte-block-icon[data-style]",
+      "control": {
+        "type": "range",
+        "style": "border-radius",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 50
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      }
+    },
+    "iconPadding": {
+      "type": "string",
+      "default": "4px",
+      "label": "Padding",
+      "panel": "-icon-",
+      "selectors": [
+        "%WRAPPER% li .wte-block-icon[data-style='stacked']",
+        "%WRAPPER% li .wte-block-icon[data-style='framed']"
+      ],
+      "control": {
+        "type": "range",
+        "style": "padding",
+        "controlAttribute": {
+          "min": 0,
+          "max": 20
+        }
+      }
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "colors": {
+        "link": false,
+        "background": true,
+        "text": true
+      },
+      "box-shadow": false,
+      "spacing": {
+        "padding": true,
+        "margin": true
+      },
+      "panels": {
+        "-icon-": {
+          "title": "Icon"
+        },
+        "-list-items-": {
+          "title": "List Items"
+        }
+      }
+    }
+  },
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

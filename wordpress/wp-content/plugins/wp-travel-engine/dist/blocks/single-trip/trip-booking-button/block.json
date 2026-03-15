@@ -1,0 +1,155 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/trip-booking-button",
+  "title": "Trip Booking Button",
+  "category": "design",
+  "description": "Prompt visitors to take action with a button-style link.",
+  "keywords": [
+    "link"
+  ],
+  "parent": [
+    "wptravelenginetripblocks/trip-fixed-starting-date"
+  ],
+  "icon": "cart",
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php",
+  "attributes": {
+    "textColor": {
+      "type": "object",
+      "default": {
+        "initial": "#fff",
+        "hover": "#fff"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Text",
+            "style": "color"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "color:hover"
+          }
+        }
+      },
+      "selectors": "%WRAPPER% .wpte-bf-btn"
+    },
+    "background": {
+      "type": "object",
+      "default": {
+        "initial": "#147dfe",
+        "hover": "#147dfe"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Background",
+            "style": "background"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "background:hover"
+          }
+        }
+      },
+      "selectors": "%WRAPPER% .wpte-bf-btn"
+    },
+    "text": {
+      "type": "string"
+    },
+    "alignment": {
+      "type": "string",
+      "label": "Alignment",
+      "default": "center",
+      "control": {
+        "type": "alignment",
+        "style": "text-align"
+      },
+      "panel": "-button-",
+      "selectors": "%WRAPPER%"
+    },
+    "padding": {
+      "type": "object",
+      "default": {
+        "top": "16px",
+        "right": "16px",
+        "bottom": "16px",
+        "left": "16px"
+      },
+      "selectors": "%WRAPPER% .wpte-bf-btn"
+    },
+    "margin": {
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      },
+      "selectors": "%WRAPPER% .wpte-bf-btn"
+    },
+    "borderRadius": {
+      "type": "object",
+      "default": {
+        "top": "4px",
+        "right": "4px",
+        "bottom": "4px",
+        "left": "4px"
+      },
+      "selectors": "%WRAPPER% .wpte-bf-btn"
+    },
+    "fullWidth": {
+      "type": "boolean",
+      "label": "Full Width",
+      "default": "100%",
+      "control": {
+        "type": "switch",
+        "style": "width"
+      },
+      "panel": "-button-",
+      "selectors": "%WRAPPER% .wpte-bf-btn"
+    },
+    "border": {
+      "type": "object",
+      "label": "Border",
+      "selectors": "%WRAPPER% .wpte-bf-btn",
+      "default": {
+        "width": "1",
+        "style": "none",
+        "color": ""
+      },
+      "control": {
+        "type": "border",
+        "style": "border"
+      }
+    },
+    "typography": {
+      "type": "object",
+      "label": "Typography",
+      "default": {},
+      "selectors": "%WRAPPER% .wpte-bf-btn",
+      "control": {
+        "type": "typography"
+      }
+    }
+  },
+  "supports": {
+    "wptravelenginetripblocks": {
+      "panels": {
+        "-button-": {
+          "title": "Button"
+        },
+        "colors": {
+          "link": false
+        }
+      }
+    }
+  },
+  "viewScript": [
+    "wte-redux",
+    "jquery-fancy-box"
+  ]
+}

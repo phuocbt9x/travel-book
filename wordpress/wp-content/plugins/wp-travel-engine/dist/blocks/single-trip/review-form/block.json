@@ -1,0 +1,514 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/review-form",
+  "version": "1.0.0",
+  "title": "Review Form",
+  "category": "widgets",
+  "icon": "forms",
+  "description": "Start with a pre-designed review form to accept submissions.",
+  "script": [],
+  "attributes": {
+    "link": {
+      "type": "object",
+      "default": {
+        "initial": "#147dfe",
+        "hover": "#147dfe"
+      },
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Link",
+            "style": "color"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "color:hover"
+          }
+        }
+      },
+      "selectors": [
+        "%WRAPPER% #respond a",
+        "%WRAPPER% .dropzone .dz-button .wte-reviews-dropzone-placeholder span"
+      ]
+    },
+    "textColor": {
+      "type": "string",
+      "selectors": [
+        "%WRAPPER% #respond .rating-form",
+        "%WRAPPER% .rating-form .dropzone .dz-button .wte-reviews-dropzone-placeholder"
+      ]
+    },
+    "background": {
+      "type": "string",
+      "default": "#ffffff",
+      "selectors": "%WRAPPER%"
+    },
+    "border": {
+      "type": "object",
+      "default": {
+        "width": "1",
+        "style": "none",
+        "color": "#000000"
+      },
+      "selectors": "%WRAPPER% "
+    },
+    "borderRadius": {
+      "type": "object",
+      "default": {},
+      "selectors": "%WRAPPER% "
+    },
+    "boxShadow": {
+      "type": "object",
+      "default": {},
+      "selectors": "%WRAPPER% "
+    },
+    "padding": {
+      "type": "object",
+      "default": {
+        "top": "24px",
+        "right": "24px",
+        "bottom": "24px",
+        "left": "24px"
+      },
+      "selectors": "%WRAPPER% "
+    },
+    "margin": {
+      "type": "object",
+      "default": {},
+      "selectors": "%WRAPPER% "
+    },
+    "rowSpacing": {
+      "type": "string",
+      "label": "Row Gap",
+      "selectors": "%WRAPPER% .rating-form .review-title-rating > *",
+      "default": "32px",
+      "control": {
+        "type": "range",
+        "style": "margin-bottom",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": "0",
+              "max": "100"
+            }
+          ]
+        }
+      },
+      "panel": "-form-"
+    },
+    "formLabel": {
+      "type": "boolean",
+      "label": "Label",
+      "default": true,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-label-"
+    },
+    "labelSpacing": {
+      "type": "string",
+      "label": "Spacing",
+      "selectors": [
+        "%WRAPPER% .rating-form label"
+      ],
+      "default": "8px",
+      "control": {
+        "type": "range",
+        "style": "margin-bottom",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": "0",
+              "max": "50"
+            }
+          ]
+        }
+      },
+      "panel": "-label-"
+    },
+    "inputTypography": {
+      "type": "object",
+      "label": "Typography",
+      "default": {},
+      "selectors": [
+        "%WRAPPER% #respond .rating-form input:not([type=submit]):not([type=checkbox]):not([type=radio])",
+        "%WRAPPER% #respond .rating-form textarea, #respond .rating-form select, .rating-form .dropzone"
+      ],
+      "control": {
+        "type": "typography"
+      },
+      "panel": "-input-"
+    },
+    "inputColor": {
+      "type": "object",
+      "label": "Color",
+      "default": {
+        "text": "#2b3034",
+        "background": "#ffffff"
+      },
+      "selectors": [
+        "%WRAPPER% #respond .rating-form input:not([type=submit]):not([type=checkbox]):not([type=radio])",
+        "%WRAPPER% #respond .rating-form textarea, #respond .rating-form select, .rating-form .dropzone"
+      ],
+      "control": {
+        "type": "color",
+        "labels": {
+          "text": {
+            "label": "Text",
+            "style": "color"
+          },
+          "background": {
+            "label": "Background",
+            "style": "background-color"
+          }
+        }
+      },
+      "panel": "-input-"
+    },
+    "inputBorder": {
+      "type": "object",
+      "label": "Border",
+      "selectors": [
+        "%WRAPPER% #respond .rating-form input:not([type=submit]):not([type=checkbox]):not([type=radio])",
+        "%WRAPPER% #respond .rating-form textarea, #respond .rating-form select"
+      ],
+      "default": {
+        "width": "1",
+        "style": "solid",
+        "color": "rgba(6, 22, 38, 0.2)"
+      },
+      "control": {
+        "type": "border",
+        "style": "border"
+      },
+      "panel": "-input-"
+    },
+    "inputBorderRadius": {
+      "type": "object",
+      "label": "Border Radius",
+      "default": {
+        "top": "4px",
+        "right": "4px",
+        "bottom": "4px",
+        "left": "4px"
+      },
+      "selectors": [
+        "%WRAPPER% #respond .rating-form input:not([type=submit]):not([type=checkbox]):not([type=radio])",
+        "%WRAPPER% #respond .rating-form textarea, #respond .rating-form select"
+      ],
+      "control": {
+        "type": "spacing",
+        "style": "borderRadius",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "panel": "-input-"
+    },
+    "inputPadding": {
+      "type": "object",
+      "label": "Padding",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      },
+      "selectors": [
+        "%WRAPPER% #respond .rating-form input:not([type=submit]):not([type=checkbox]):not([type=radio])",
+        "%WRAPPER% #respond .rating-form textarea, #respond .rating-form select"
+      ],
+      "control": {
+        "type": "spacing",
+        "style": "padding"
+      },
+      "panel": "-input-"
+    },
+    "buttonTypography": {
+      "type": "object",
+      "label": "Typography",
+      "default": {},
+      "selectors": "%WRAPPER% #respond input[type='submit']",
+      "control": {
+        "type": "typography"
+      },
+      "panel": "-buttons-"
+    },
+    "buttonLabel": {
+      "type": "string",
+      "label": "Button Label",
+      "default": "Submit",
+      "control": {
+        "type": "text"
+      },
+      "panel": "-buttons-"
+    },
+    "btnColor": {
+      "type": "object",
+      "label": "Text Color",
+      "default": {
+        "initial": "#ffffff",
+        "hover": "#ffffff"
+      },
+      "selectors": "%WRAPPER% #respond input[type='submit']",
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Initial",
+            "style": "color"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "color:hover"
+          }
+        }
+      },
+      "panel": "-buttons-"
+    },
+    "btnbgColor": {
+      "type": "object",
+      "label": "Background",
+      "default": {
+        "initial": "#147DFE",
+        "hover": "#147DFE"
+      },
+      "selectors": "%WRAPPER% #respond input[type='submit']",
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Initial",
+            "style": "background"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "background:hover"
+          }
+        }
+      },
+      "panel": "-buttons-"
+    },
+    "buttonAlignment": {
+      "type": "string",
+      "label": "Alignment",
+      "panel": "-buttons-",
+      "selectors": "%WRAPPER% #respond .rating-form .form-submit",
+      "control": {
+        "type": "alignment",
+        "style": "text-align"
+      },
+      "default": "left"
+    },
+    "fullWidth": {
+      "type": "boolean",
+      "label": "Full Width",
+      "default": false,
+      "control": {
+        "type": "switch"
+      },
+      "panel": "-buttons-"
+    },
+    "buttonBorder": {
+      "type": "object",
+      "label": "Border",
+      "default": {
+        "width": "1",
+        "style": "none",
+        "color": "#000000"
+      },
+      "selectors": "%WRAPPER% #respond input[type='submit']",
+      "control": {
+        "type": "border"
+      },
+      "panel": "-buttons-"
+    },
+    "buttonBorderRadius": {
+      "type": "object",
+      "label": "Border Radius",
+      "default": {
+        "top": "4px",
+        "right": "4px",
+        "bottom": "4px",
+        "left": "4px"
+      },
+      "selectors": "%WRAPPER% #respond input[type='submit']",
+      "control": {
+        "type": "spacing",
+        "style": "borderRadius",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "panel": "-buttons-"
+    },
+    "buttonPadding": {
+      "type": "object",
+      "label": "Padding",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      },
+      "selectors": "%WRAPPER% #respond input[type='submit']",
+      "control": {
+        "type": "spacing",
+        "style": "padding"
+      },
+      "panel": "-buttons-"
+    },
+    "ratedStarColor": {
+      "type": "string",
+      "label": "Star Color",
+      "default": "#F39C12",
+      "selectors": "%WRAPPER% .jq-ry-container > .jq-ry-group-wrapper > .jq-ry-group > svg",
+      "control": {
+        "type": "color",
+        "style": "fill"
+      },
+      "panel": "-star-"
+    },
+    "iconColor": {
+      "type": "string",
+      "label": "Icon Color",
+      "default": "#147DFE",
+      "selectors": [
+        "%WRAPPER% .rating-form .dropzone .dz-button .file-upload-icon svg path",
+        "%WRAPPER% .dropzone .dz-button .file-upload-icon svg path"
+      ],
+      "control": {
+        "type": "color",
+        "style": "fill"
+      },
+      "panel": "-uploader-"
+    },
+    "iconSize": {
+      "type": "string",
+      "label": "Icon Size",
+      "panel": "-uploader-",
+      "default": "44px",
+      "control": {
+        "type": "range",
+        "style": "font-size",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 1,
+              "max": 100
+            },
+            {
+              "unit": "em",
+              "min": 1,
+              "max": 10
+            },
+            {
+              "unit": "rem",
+              "min": 1,
+              "max": 10
+            }
+          ]
+        }
+      },
+      "selectors": "%WRAPPER% .rating-form .dropzone .dz-button .file-upload-icon svg"
+    },
+    "dropzoneBorder": {
+      "type": "object",
+      "label": "Border",
+      "default": {
+        "width": "1",
+        "style": "dashed",
+        "color": "#1a84ee"
+      },
+      "selectors": "%WRAPPER% .rating-form .dropzone.input-review-images",
+      "control": {
+        "type": "border"
+      },
+      "panel": "-uploader-"
+    },
+    "dropzoneBorderRadius": {
+      "type": "object",
+      "label": "Border Radius",
+      "default": {
+        "top": "4px",
+        "right": "4px",
+        "bottom": "4px",
+        "left": "4px"
+      },
+      "selectors": "%WRAPPER% .rating-form .dropzone.input-review-images",
+      "control": {
+        "type": "spacing",
+        "style": "borderRadius",
+        "controlAttribute": {
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 100
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "panel": "-uploader-"
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "panels": {
+        "-star-": {
+          "title": "Star"
+        },
+        "-input-": {
+          "title": "Input"
+        },
+        "-buttons-": {
+          "title": "Button"
+        },
+        "-uploader-": {
+          "title": "Uploader"
+        },
+        "-form-": {
+          "title": "Form"
+        },
+        "-label-": {
+          "title": "Label"
+        }
+      }
+    }
+  },
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

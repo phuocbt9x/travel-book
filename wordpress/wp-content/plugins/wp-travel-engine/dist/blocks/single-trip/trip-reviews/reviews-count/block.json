@@ -1,0 +1,74 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/reviews-count",
+  "version": "1.0.0",
+  "title": "Reviews Count",
+  "category": "widgets",
+  "icon": "editor-ol",
+  "description": "Showcase the volume of positive reviews you've received to increase social proof.",
+  "script": [],
+  "attributes": {
+    "textColor": {
+      "type": "string",
+      "default": "rgba(6, 22, 38, 0.4)",
+      "selectors": [
+        "%WRAPPER% .trip-rating-count",
+        "%WRAPPER% .trip-rating-count-number"
+      ]
+    },
+    "alignment": {
+      "type": "string",
+      "label": "Alignment",
+      "panel": "-reviewcount-",
+      "default": "center",
+      "control": {
+        "type": "alignment",
+        "style": "text-align"
+      },
+      "selectors": "%WRAPPER% .trip-rating-count-container"
+    },
+    "typography": {
+      "type": "object",
+      "default": {
+        "size": {
+          "desktop": "14px",
+          "tablet": "14px",
+          "mobile": "14px"
+        }
+      }
+    },
+    "ratingCount": {
+      "type": "string",
+      "label": "Rating Count",
+      "default": "Based on %rating_count% travel reviews",
+      "control": {
+        "type": "text",
+        "help": "Available Tag: %rating_count%"
+      },
+      "panel": "-display-"
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "colors": {
+        "background": true,
+        "text": true,
+        "link": false
+      },
+      "panels": {
+        "-reviewcount-": {
+          "title": "Review Count",
+          "icon": "admin-site-alt2"
+        },
+        "-display-": {
+          "title": "Display",
+          "icon": "admin-site-alt2"
+        }
+      }
+    }
+  },
+  "textdomain": "wptravelengine",
+  "render": "file:./block.php"
+}

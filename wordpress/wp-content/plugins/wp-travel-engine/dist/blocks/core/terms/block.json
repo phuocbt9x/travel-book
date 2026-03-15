@@ -1,0 +1,84 @@
+{
+  "apiVersion": 3,
+  "name": "wptravelengine/terms",
+  "title": "WP Travel Engine - Terms",
+  "description": "Display trip categories created under Custom Filters, like Destinations, Activities and Trip Types.",
+  "category": "widgets",
+  "script": [],
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "subtitle": {
+      "type": "string",
+      "default": ""
+    },
+    "showTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "showSubtitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "titleLevel": {
+      "type": "number",
+      "default": 3
+    },
+    "itemsCount": {
+      "type": "number",
+      "default": 6
+    },
+    "itemsPerRow": {
+      "type": "number",
+      "default": 3
+    },
+    "cardlayout": {
+      "type": "number",
+      "default": 1
+    },
+    "linkText": {
+      "type": "string",
+      "default": "View More"
+    },
+    "countLabel": {
+      "type": "string",
+      "default": "Trip|Trips"
+    },
+    "listby": {
+      "type": "string",
+      "default": "default"
+    },
+    "listItems": {
+      "type": "array",
+      "default": []
+    },
+    "taxonomy": {
+      "type": "string",
+      "default": "destination"
+    },
+    "layoutFilters": {
+      "type": "object",
+      "default": {
+        "showCTAButton": true,
+        "showFeaturedRibbon": true,
+        "showDescription": false,
+        "showFeaturedImage": true,
+        "showTitle": true,
+        "showPrice": true,
+        "showStrikedPrice": false,
+        "showDuration": true,
+        "showLocation": true,
+        "showReviews": false,
+        "showDiscount": true,
+        "showTripType": false,
+        "showGroupSize": false,
+        "showTripAvailableTime": false,
+        "showViewMoreButton": true,
+        "showTripCounts": true
+      }
+    }
+  },
+  "render": "file:./block.php"
+}

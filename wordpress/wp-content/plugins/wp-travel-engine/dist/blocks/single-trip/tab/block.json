@@ -1,0 +1,491 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/tab",
+  "version": "1.0.0",
+  "icon": "calendar",
+  "title": "WP Travel Engine Tab",
+  "category": "widgets",
+  "description": "Organize and present your trip information in a structured tabbed format.",
+  "example": {},
+  "script": [],
+  "attributes": {
+    "tabs": {
+      "type": "array",
+      "default": []
+    },
+    "tabSticky": {
+      "type": "boolean",
+      "default": false,
+      "label": "Sticky",
+      "panel": "-tab-",
+      "control": {
+        "type": "switch",
+        "controlAttribute": {
+          "description": "It will only work on desktop screens."
+        }
+      }
+    },
+    "tabOffsetTop": {
+      "type": "string",
+      "default": "0px",
+      "panel": "-tab-",
+      "label": "Offset Top",
+      "control": {
+        "type": "range",
+        "controlAttribute": {
+          "description": "It will work when sticky is enabled.",
+          "units": [
+            {
+              "unit": "px",
+              "min": 0,
+              "max": 500
+            },
+            {
+              "unit": "%",
+              "min": 0,
+              "max": 100
+            }
+          ]
+        }
+      }
+    },
+    "tabDirection": {
+      "type": "string",
+      "default": "top",
+      "label": "Direction",
+      "panel": "-tab-",
+      "control": {
+        "type": "select",
+        "controlAttribute": {
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "direction": "horizontal"
+        }
+      }
+    },
+    "tabWidth": {
+      "type": "string",
+      "default": "200px",
+      "label": "Width",
+      "panel": "-tab-",
+      "control": {
+        "type": "range",
+        "controlAttribute": {
+          "description": "It will work in the tab direction of 'Left' or 'Right'.",
+          "min": 0,
+          "max": 500
+        }
+      }
+    },
+    "tabJustify": {
+      "type": "string",
+      "default": "",
+      "label": "Justify",
+      "panel": "-tab-",
+      "control": {
+        "type": "alignment",
+        "controlAttribute": {
+          "flex": true
+        }
+      }
+    },
+    "tabSpaceBetween": {
+      "type": "string",
+      "default": "0px",
+      "label": "Space Between",
+      "panel": "-tab-",
+      "control": {
+        "type": "range",
+        "controlAttribute": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    },
+    "tabBackground": {
+      "type": "string",
+      "default": "",
+      "label": "Background",
+      "panel": "-tab-",
+      "control": {
+        "type": "color"
+      }
+    },
+    "tabBorderColor": {
+      "type": "string",
+      "default": "",
+      "label": "Border Color",
+      "panel": "-tab-",
+      "control": {
+        "type": "color"
+      }
+    },
+    "tabBorderStyle": {
+      "type": "string",
+      "default": "none",
+      "label": "Border Style",
+      "panel": "-tab-",
+      "control": {
+        "type": "select",
+        "controlAttribute": {
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "solid",
+              "label": "Solid"
+            },
+            {
+              "value": "dashed",
+              "label": "Dash"
+            },
+            {
+              "value": "double",
+              "label": "Double"
+            },
+            {
+              "value": "dotted",
+              "label": "Dotted"
+            }
+          ]
+        }
+      }
+    },
+    "tabBorderWidth": {
+      "type": "object",
+      "default": {
+        "top": "1px",
+        "right": "1px",
+        "bottom": "1px",
+        "left": "1px"
+      },
+      "label": "Border Width",
+      "panel": "-tab-",
+      "control": {
+        "type": "spacing"
+      }
+    },
+    "tabBorderRadius": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      },
+      "label": "Border Radius",
+      "panel": "-tab-",
+      "control": {
+        "type": "spacing"
+      }
+    },
+    "tabBoxShadow": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "position": "outline",
+        "xOffset": "2px",
+        "yOffset": "4px",
+        "blur": "20px",
+        "spread": "0px",
+        "color": "rgba(0,0,0, 0.7)"
+      },
+      "label": "Box Shadow",
+      "panel": "-tab-",
+      "control": {
+        "type": "box-shadow"
+      }
+    },
+    "tabPadding": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      },
+      "label": "Padding",
+      "panel": "-tab-",
+      "control": {
+        "type": "spacing"
+      }
+    },
+    "tabMargin": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      },
+      "label": "Margin",
+      "panel": "-tab-",
+      "control": {
+        "type": "spacing"
+      }
+    },
+    "boxShadow": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "position": "outline",
+        "xOffset": "2px",
+        "yOffset": "4px",
+        "blur": "20px",
+        "spread": "0px",
+        "color": "rgba(0,0,0, 0.7)"
+      }
+    },
+    "tabTypography": {
+      "type": "object",
+      "label": "Typography",
+      "default": {
+        "size": {
+          "desktop": "16px",
+          "tablet": "16px",
+          "mobile": "16px"
+        }
+      },
+      "panel": "-tab-title-",
+      "control": {
+        "type": "typography"
+      },
+      "selectors": "%WRAPPER% .wpte-block_tab-button"
+    },
+    "tabTitleAlignment": {
+      "type": "string",
+      "label": "Alignment",
+      "default": "",
+      "panel": "-tab-title-",
+      "control": {
+        "type": "alignment",
+        "controlAttribute": {
+          "flex": true
+        }
+      }
+    },
+    "tabTitleColor": {
+      "type": "object",
+      "label": "Color",
+      "default": {
+        "initial": "#000000",
+        "hover": "#ffffff",
+        "active": "#ffffff"
+      },
+      "panel": "-tab-title-",
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Initial",
+            "style": "color"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "color:hover"
+          },
+          "active": {
+            "label": "Active",
+            "style": "color:active"
+          }
+        }
+      }
+    },
+    "tabTitleBackground": {
+      "type": "object",
+      "label": "Background",
+      "default": {
+        "initial": "#efefef",
+        "hover": "#1a84ee",
+        "active": "#1a84ee"
+      },
+      "panel": "-tab-title-",
+      "control": {
+        "type": "color",
+        "labels": {
+          "initial": {
+            "label": "Initial",
+            "style": "color"
+          },
+          "hover": {
+            "label": "Hover",
+            "style": "color:hover"
+          },
+          "active": {
+            "label": "Active",
+            "style": "color:active"
+          }
+        }
+      }
+    },
+    "tabTitleBorderRadius": {
+      "type": "object",
+      "label": "Border Radius",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      },
+      "panel": "-tab-title-",
+      "control": {
+        "type": "spacing"
+      }
+    },
+    "tabTitleShadow": {
+      "type": "object",
+      "label": "Box Shadow",
+      "default": {
+        "enable": false,
+        "position": "outline",
+        "xOffset": "2px",
+        "yOffset": "4px",
+        "blur": "20px",
+        "spread": "0px",
+        "color": "rgba(0,0,0, 0.7)"
+      },
+      "panel": "-tab-title-",
+      "control": {
+        "type": "box-shadow"
+      }
+    },
+    "tabTitlePadding": {
+      "type": "object",
+      "label": "Padding",
+      "default": {
+        "top": "12px",
+        "right": "16px",
+        "bottom": "12px",
+        "left": "16px"
+      },
+      "panel": "-tab-title-",
+      "control": {
+        "type": "spacing"
+      }
+    },
+    "contentBackground": {
+      "type": "string",
+      "default": "#efefef",
+      "label": "Background",
+      "control": {
+        "type": "color"
+      },
+      "panel": "-content-"
+    },
+    "contentBorder": {
+      "type": "object",
+      "label": "Border",
+      "default": {
+        "width": 1,
+        "style": "none",
+        "color": ""
+      },
+      "control": {
+        "type": "border"
+      },
+      "panel": "-content-"
+    },
+    "contentBoxShadow": {
+      "type": "object",
+      "label": "Box Shadow",
+      "default": {
+        "enable": false,
+        "position": "outline",
+        "xOffset": "2px",
+        "yOffset": "4px",
+        "blur": "20px",
+        "spread": "0px",
+        "color": "rgba(0,0,0, 0.7)"
+      },
+      "control": {
+        "type": "box-shadow"
+      },
+      "panel": "-content-"
+    },
+    "contentBorderRadius": {
+      "type": "object",
+      "label": "Border Radius",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      },
+      "panel": "-content-",
+      "control": {
+        "type": "spacing"
+      }
+    },
+    "contentPadding": {
+      "type": "object",
+      "label": "Padding",
+      "default": {
+        "top": "24px",
+        "right": "24px",
+        "bottom": "24px",
+        "left": "24px"
+      },
+      "panel": "-content-",
+      "control": {
+        "type": "spacing"
+      }
+    },
+    "contentMargin": {
+      "type": "object",
+      "label": "Margin",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      },
+      "panel": "-content-",
+      "control": {
+        "type": "spacing"
+      }
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "typography": false,
+      "colors": {
+        "link": false,
+        "textColor": false
+      },
+      "border": true,
+      "spacing": {
+        "margin": true,
+        "padding": true
+      },
+      "panels": {
+        "-tab-": {
+          "title": "Tab"
+        },
+        "-tab-title-": {
+          "title": "Titles"
+        },
+        "-content-": {
+          "title": "Content"
+        }
+      }
+    }
+  },
+  "textdomain": "wptravelengine-trip-blocks",
+  "render": "file:./block.php"
+}

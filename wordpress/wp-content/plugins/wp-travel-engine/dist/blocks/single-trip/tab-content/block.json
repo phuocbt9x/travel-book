@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wptravelenginetripblocks/tab-content",
+  "parent": [
+    "wptravelenginetripblocks/tab"
+  ],
+  "version": "1.0.0",
+  "icon": "calendar",
+  "title": "WP Travel Engine Tab Content",
+  "category": "widgets",
+  "description": "WP Travel Engine - Tab Content Block",
+  "example": {},
+  "attributes": {
+    "id": {
+      "type": "string"
+    },
+    "border": {
+      "type": "object",
+      "default": {
+        "width": "",
+        "style": "",
+        "color": ""
+      }
+    }
+  },
+  "supports": {
+    "align": false,
+    "wptravelenginetripblocks": {
+      "colors": {
+        "link": false,
+        "textColor": false
+      },
+      "border": true,
+      "spacing": {
+        "margin": true,
+        "padding": true
+      },
+      "panels": {}
+    }
+  },
+  "textdomain": "wptravelengine-trip-blocks"
+}
