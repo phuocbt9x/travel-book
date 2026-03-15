@@ -1,149 +1,241 @@
 # Travel — WordPress Tour Booking
 
-Multi-language (VI / EN / ES) tour booking platform on WordPress, run with Docker.
+Nền tảng đặt tour du lịch đa ngôn ngữ (VI / EN / ES) xây dựng trên WordPress, chạy bằng Docker.
 
 ## Stack
 
-| Component     | Role |
-|-------------|------|
-| **Nginx**   | Reverse proxy; serves static assets and proxies PHP to php-fpm. Ports 80/443 (overridable via `.env`). |
-| **PHP-FPM** | PHP 8.3; config from `.env`; `php.ini` generated from template at container start. |
-| **WordPress** | Core in volume `wp_app`; `wp-content` and `wp-config.php` bind-mounted from host. |
-| **MySQL 8** | Database. Port 3306 exposed to host (overridable); used by app and phpMyAdmin. |
-| **Redis 7** | Object cache (Redis Object Cache plugin). Internal only; no port published. |
-| **phpMyAdmin** | Web UI for MySQL. Port 8080 by default (overridable via `PHPMYADMIN_PORT`). |
+| Thành phần | Vai trò |
+|---|---|
+| **Nginx** | Reverse proxy; phục vụ static assets và chuyển tiếp PHP đến php-fpm. Port 80/443 (thay đổi qua `.env`). |
+| **PHP-FPM** | PHP 8.3; config từ `.env`; `php.ini` được sinh từ template khi container khởi động. |
+| **WordPress** | Core nằm trong volume `wp_app`; `wp-content` và `wp-config.php` bind-mount từ host. |
+| **MySQL 8.0.40** | Database. Port 3306 expose ra host (thay đổi qua `MYSQL_PORT`). |
+| **Redis 7.2.4** | Object cache (plugin Redis Object Cache). Nội bộ, không expose port ra ngoài. |
+| **phpMyAdmin** | Giao diện web quản lý MySQL. Port 8080 mặc định (thay đổi qua `PHPMYADMIN_PORT`). |
 
-## Requirements
+## Yêu cầu
 
 - Docker
 - Docker Compose
 
-## Project structure
+## Cấu trúc project
 
 ```
 .
 ├── .env
 ├── .env-example
 ├── docker-compose.yml
+├── README.md
 ├── wordpress/
 │   ├── wp-config.php
 │   ├── wp-content/
+│   │   ├── plugins/
+│   │   ├── themes/
+│   │   └── uploads/
 │   └── core/
+│       └── Dockerfile
 ├── infra/
 │   ├── nginx/
+│   │   └── nginx.conf
 │   ├── php/
+│   │   ├── Dockerfile
+│   │   └── php.ini.template
 │   ├── redis/
+│   │   └── redis.conf
 │   └── healthcheck.php
-└── ${APP_NAME}/
-    ├── data/
-    └── logs/
+└── logs/
+    ├── nginx/
+    ├── php/
+    ├── mysql/
+    └── redis/
 ```
 
-## Building and running the project
+> **Data** (MySQL, Redis) được lưu trong Docker named volumes — không nằm trên host filesystem.
+> **Logs** bind-mount vào `./logs/` để dễ theo dõi và debug.
 
-### 1. Clone and enter the repo
+## Khởi động dự án
+
+### 1. Clone repo
 
 ```bash
 git clone <repository-url> travel
 cd travel
 ```
 
-### 2. Create environment file
-
-Copy the example env and set your values:
+### 2. Tạo file môi trường
 
 ```bash
 cp .env-example .env
 ```
 
-Edit `.env`. Required and commonly changed variables:
+Chỉnh sửa `.env`. Các biến quan trọng cần thay đổi:
 
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `APP_NAME` | App name; used for `./${APP_NAME}/data` and `./${APP_NAME}/logs` | `wp_travel` |
-| `WP_HOME` | Site URL | `http://localhost` |
-| `WP_SITEURL` | Site URL (defaults to `WP_HOME`) | `http://localhost` |
-| `DB_NAME` | MySQL database name | `wordpress` |
-| `DB_USER` | MySQL user | `wp_user` |
-| `DB_PASSWORD` | MySQL password | (set a strong password) |
-| `DB_ROOT_PASSWORD` | MySQL root password | (set a strong password) |
-| `REDIS_PASSWORD` | Redis password | (set a strong password) |
-| `AUTH_KEY`, `SECURE_AUTH_KEY`, … | WordPress salts/keys | Generate new for production |
+| Biến | Mô tả | Ví dụ |
+|---|---|---|
+| `WP_HOME` | URL website | `http://localhost` |
+| `DB_NAME` | Tên database MySQL | `wordpress` |
+| `DB_USER` | User MySQL | `wp_user` |
+| `DB_PASSWORD` | Mật khẩu MySQL | (đặt mật khẩu mạnh) |
+| `DB_ROOT_PASSWORD` | Mật khẩu root MySQL | (đặt mật khẩu mạnh) |
+| `REDIS_PASSWORD` | Mật khẩu Redis | (đặt mật khẩu mạnh) |
+| `AUTH_KEY`, `SECURE_AUTH_KEY`, … | WordPress salts/keys | Tạo mới cho production tại https://api.wordpress.org/secret-key/1.1/salt/ |
+| `TZ` | Timezone | `Asia/Ho_Chi_Minh` |
+| `TZ_OFFSET` | Timezone offset cho MySQL | `+07:00` |
 
-Optional: `NGINX_HTTP_PORT`, `NGINX_HTTPS_PORT`, `MYSQL_PORT`, `PHPMYADMIN_PORT`, `PHP_*`, `TZ`, etc.
+Tuỳ chọn: `NGINX_HTTP_PORT`, `NGINX_HTTPS_PORT`, `MYSQL_PORT`, `PHPMYADMIN_PORT`, `PHP_*`.
 
-### 3. Create data and log directories
-
-Compose uses `./${APP_NAME}/data` and `./${APP_NAME}/logs`. With default `APP_NAME=wp_travel`:
+### 3. Tạo thư mục logs
 
 ```bash
-mkdir -p wp_travel/data wp_travel/logs
+mkdir -p logs/{nginx,php,mysql,redis}
 ```
 
-Or use another `APP_NAME` and create `./<APP_NAME>/data` and `./<APP_NAME>/logs`.
-
-### 4. Build images and start containers
+### 4. Build và khởi động
 
 ```bash
 docker compose up -d --build
 ```
 
-This will:
+Quá trình này sẽ:
+1. Build image PHP-FPM (`infra/php/Dockerfile`) và WordPress app (`wordpress/core/Dockerfile`).
+2. Khởi động MySQL và Redis, chờ healthy.
+3. Chạy `wordpress-app` (init container) để copy WordPress core vào volume `wp_app`.
+4. Khởi động `php-fpm` (chờ `wordpress-app` hoàn tất và MySQL/Redis healthy).
+5. Khởi động Nginx (chờ `php-fpm` healthy) và phpMyAdmin.
 
-- Build the PHP-FPM image (from `infra/php/Dockerfile`) and the WordPress app image (from `wordpress/core/Dockerfile`).
-- Start MySQL and Redis, then wait for them to be healthy.
-- Run the one-off `wordpress-app` service to populate the `wp_app` volume with WordPress core.
-- Start php-fpm (waits for wordpress-app to complete and for MySQL/Redis health).
-- Start Nginx (waits for php-fpm health) and phpMyAdmin.
-
-### 5. Wait for services to be ready
-
-Check that all services are up and healthy:
+### 5. Kiểm tra trạng thái
 
 ```bash
 docker compose ps
 ```
 
-Ensure `nginx`, `php-fpm`, `mysql`, `redis`, and `phpmyadmin` are running. Initial MySQL data directory creation can take a minute.
+Kết quả mong đợi:
 
-### 6. Open the site and finish WordPress setup
+```
+NAME             STATUS
+mysql            Up (healthy)
+redis            Up (healthy)
+wordpress-app    Exited (0)     ← đúng, init container tự thoát sau khi xong
+php-fpm          Up (healthy)
+nginx            Up (healthy)
+phpmyadmin       Up
+```
 
-1. In a browser, open the URL set in `WP_HOME` (e.g. `http://localhost`).
-2. Complete the WordPress installation (language, admin user, password).
-3. Log in to the admin. Plugins and themes installed from the admin will appear under `wordpress/wp-content/` on the host.
+### 6. Cài đặt WordPress lần đầu
 
-### 7. Optional: phpMyAdmin
+1. Mở trình duyệt tại URL đã đặt trong `WP_HOME` (ví dụ `http://localhost`).
+2. Hoàn tất wizard cài đặt WordPress (ngôn ngữ, tài khoản admin, mật khẩu).
+3. Đăng nhập Admin. Plugin và theme cài qua Admin sẽ xuất hiện trong `wordpress/wp-content/` trên host.
 
-Open `http://localhost:8080` (or the host/port given by `PHPMYADMIN_PORT`). Log in with `DB_USER`/`DB_PASSWORD` or `root`/`DB_ROOT_PASSWORD` from `.env`.
+### 7. Kích hoạt plugin theo thứ tự
 
-## Common commands
+```
+1. WP Travel Engine
+2. Polylang          → thiết lập 3 ngôn ngữ VI / EN / ES
+3. Rank Math SEO     → chạy wizard setup
+4. Redis Object Cache → Enable Object Cache
+5. Các plugin còn lại
+```
+
+### 8. phpMyAdmin (tuỳ chọn)
+
+Mở `http://localhost:8080`. Đăng nhập bằng `DB_USER`/`DB_PASSWORD` hoặc `root`/`DB_ROOT_PASSWORD` từ `.env`.
+
+## Lệnh thường dùng
 
 ```bash
+# Khởi động (build lại nếu có thay đổi Dockerfile)
 docker compose up -d --build
+
+# Dừng và xóa container (giữ nguyên data trong volumes)
 docker compose down
+
+# Dừng và xóa cả volumes (MẤT toàn bộ data MySQL và Redis)
 docker compose down -v
-docker compose logs -f [service]
+
+# Xem log realtime
+docker compose logs -f
+docker compose logs -f php-fpm
+docker compose logs -f nginx
+
+# Kiểm tra trạng thái
 docker compose ps
-docker compose restart [service]
+
+# Restart một service
+docker compose restart nginx
+docker compose restart php-fpm
 ```
 
-- `down`: stops and removes containers; keeps volumes (data preserved).
-- `down -v`: also removes volumes; MySQL and Redis data will be lost.
-- Replace `[service]` with e.g. `nginx`, `php-fpm`, `mysql`, `redis`, `phpmyadmin`.
+## Cấu hình
 
-## Configuration
+| File | Cách áp dụng thay đổi |
+|---|---|
+| `.env` | Restart service liên quan hoặc rebuild |
+| `wordpress/wp-config.php` | `docker compose restart php-fpm` |
+| `infra/php/php.ini.template` | `docker compose up -d --build php-fpm` |
+| `infra/nginx/nginx.conf` | `docker compose restart nginx` |
+| `infra/redis/redis.conf` | `docker compose restart redis` |
 
-- **WordPress:** `wordpress/wp-config.php` reads from environment variables (`.env`). Change `.env` and restart the app layer (e.g. `docker compose restart php-fpm`) as needed.
-- **PHP:** `php.ini` is generated at php-fpm start from `infra/php/php.ini.template` using `.env` (e.g. `PHP_MEMORY_LIMIT`, `TZ`). Edit `.env` and rebuild/restart php-fpm to apply.
-- **Nginx:** Edit `infra/nginx/nginx.conf`, then `docker compose restart nginx`.
-- **Redis:** Edit `infra/redis/redis.conf`, then `docker compose restart redis`. Redis is not exposed to the host; only containers on the `backend` network can connect.
+## Data và Logs
 
-## Data and logs
+| Loại | Vị trí | Ghi chú |
+|---|---|---|
+| MySQL data | Named volume `mysql_data` | Quản lý bởi Docker |
+| Redis data | Named volume `redis_data` | Quản lý bởi Docker |
+| WP core | Named volume `wp_app` | Quản lý bởi Docker |
+| wp-content | `./wordpress/wp-content/` | Bind mount — commit Git được |
+| Logs | `./logs/{nginx,php,mysql,redis}/` | Bind mount — xem trực tiếp |
 
-- **Data:** `./${APP_NAME}/data/mysql`, `./${APP_NAME}/data/redis`
-- **Logs:** `./${APP_NAME}/logs/nginx`, `./${APP_NAME}/logs/php`, `./${APP_NAME}/logs/mysql`, `./${APP_NAME}/logs/redis`. WordPress debug log path is set by `WP_DEBUG_LOG` in `.env` (typically under the php log directory).
+## Backup & Bàn giao
 
-## Security
+### Export database
 
-- Nginx publishes 80/443; phpMyAdmin publishes 8080 (or `PHPMYADMIN_PORT`); MySQL publishes 3306 (or `MYSQL_PORT`). Redis and php-fpm have no published ports and are only reachable on the Docker network.
-- For production: set strong secrets in `.env`, use HTTPS, restrict or remove port publishing where possible, configure firewall, and back up data and logs.
+```bash
+docker exec mysql mysqldump \
+  -uroot -p${DB_ROOT_PASSWORD} \
+  wordpress > backup/wordpress_$(date +%Y%m%d).sql
+```
+
+### Export uploads
+
+```bash
+zip -r backup/uploads_$(date +%Y%m%d).zip \
+  wordpress/wp-content/uploads/
+```
+
+### Restore trên máy mới
+
+```bash
+# 1. Clone repo và tạo .env
+cp .env-example .env
+
+# 2. Tạo thư mục logs
+mkdir -p logs/{nginx,php,mysql,redis}
+
+# 3. Khởi động stack
+docker compose up -d --build
+
+# 4. Import database
+docker exec -i mysql mysql \
+  -uroot -p${DB_ROOT_PASSWORD} \
+  wordpress < backup/wordpress_YYYYMMDD.sql
+
+# 5. Copy uploads
+unzip backup/uploads_YYYYMMDD.zip \
+  -d wordpress/wp-content/uploads/
+```
+
+## Chuyển máy / OS khác
+
+- **Source code và wp-content:** copy toàn bộ project folder là đủ.
+- **Database và Redis:** lưu trong named volumes — cần export/import bằng lệnh backup ở trên trước khi chuyển.
+- **Logs:** bind mount vào `./logs/` — copy cùng project hoặc bỏ qua tùy nhu cầu.
+
+> **Lưu ý MySQL trên Linux:** Nếu chuyển data từ macOS sang Linux, nên export SQL và import lại thay vì copy thư mục data trực tiếp để tránh lỗi `lower-case-table-names`.
+
+## Bảo mật
+
+- **Development:** cấu hình mặc định trong `.env-example` chỉ dùng cho local.
+- **Production:** đổi toàn bộ password và salt keys, bật HTTPS, giới hạn hoặc tắt port MySQL/phpMyAdmin ra ngoài internet, cấu hình firewall.
+- Redis và PHP-FPM không expose port ra ngoài — chỉ các container trong network `backend` mới kết nối được.
+- phpMyAdmin chỉ nên bật khi cần, tắt khi deploy production bằng cách comment service trong `docker-compose.yml`.

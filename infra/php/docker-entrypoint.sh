@@ -1,11 +1,15 @@
 #!/bin/sh
 set -e
+
 export PHP_MEMORY_LIMIT="${PHP_MEMORY_LIMIT:-512M}"
 export PHP_MAX_EXECUTION_TIME="${PHP_MAX_EXECUTION_TIME:-120}"
 export PHP_UPLOAD_MAX_FILESIZE="${PHP_UPLOAD_MAX_FILESIZE:-64M}"
 export PHP_POST_MAX_SIZE="${PHP_POST_MAX_SIZE:-64M}"
-export TZ="${TZ:-UTC}"
+export TZ="${TZ:-Asia/Ho_Chi_Minh}"
 export PHP_SESSION_COOKIE_SECURE="${PHP_SESSION_COOKIE_SECURE:-0}"
+
 envsubst '$PHP_MEMORY_LIMIT $PHP_MAX_EXECUTION_TIME $PHP_UPLOAD_MAX_FILESIZE $PHP_POST_MAX_SIZE $TZ $PHP_SESSION_COOKIE_SECURE' \
-  < /usr/local/etc/php/php.ini.template > /usr/local/etc/php/php.ini
+  < /usr/local/etc/php/php.ini.template \
+  > /usr/local/etc/php/conf.d/custom.ini
+
 exec php-fpm
